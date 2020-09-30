@@ -1,0 +1,19 @@
+<resources>
+    <string name="Orquesta">Orquesta</string>
+    <string name="Piano">Piano</string>
+    <string name="Guitarra">Guitarra</string>
+    <string name="Bateria">Bateria</string>
+    <string name="Flauta">Flauta</string>
+
+    <string name="Volumen">Volumen</string>
+    <string name="Instrumento">Instrumentos</string>
+
+    <string-array name="Instrumentos">
+        <item>Piano</item>
+        <item>Guitarra</item>
+        <item>Bateria</item>
+        <item>Flauta</item>
+        <item>Trompeta</item>
+    </string-array>
+
+</resources>

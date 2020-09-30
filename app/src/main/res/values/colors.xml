@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Blanca">#FFFFFF</color>
+    <color name="Negra">#000000</color>
+    <color name="Gris">#737373</color>
+    <color name="Azul">#06259F</color>
+    <color name="Rojo">#9A0303</color>
+    <color name="Amarillo">#F1D900</color>
+    <color name="Verde">#088104</color>
+    <color name="Beige">#C59A66</color>
+    <color name="Brown">#8E5A1B</color>
+    <color name="DarkBrown">#5C380C</color>
+
+    <color name="Control">#000B4D</color>
+</resources>

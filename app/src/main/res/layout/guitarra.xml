@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Principal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/DarkBrown"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <SeekBar
+        android:id="@+id/volumen"
+        style="@style/boton_volumen"
+        android:layout_width="325dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/Brown" />
+
+    <LinearLayout
+        android:id="@+id/Mastil"
+        android:layout_width="700dp"
+        android:layout_height="130dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/Cuerdas"
+            android:layout_width="650dp"
+            android:layout_height="130dp"
+            android:background="@color/Beige"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/M"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+            <Button
+                android:id="@+id/Si"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+            <Button
+                android:id="@+id/S"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+            <Button
+                android:id="@+id/R"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+            <Button
+                android:id="@+id/L"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+            <Button
+                android:id="@+id/M2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gris" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Agarre"
+            android:layout_width="50dp"
+            android:layout_height="130dp"
+            android:background="@color/Brown"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Botones"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/Acustica"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="20dp"
+            android:onClick="Tipo"
+            android:src="@drawable/botonguitarra" />
+
+        <ImageButton
+            android:id="@+id/Electrica"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:onClick="Tipo"
+            android:src="@drawable/botonguitarra" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

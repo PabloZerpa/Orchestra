@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@color/Negra">
+
+    <LinearLayout
+        android:id="@+id/AreaControl"
+        style="@style/Control"
+        android:background="@color/Control"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+
+        <SeekBar
+            android:id="@+id/volumen"
+            style="@style/boton_volumen"
+            android:layout_width="325dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@color/Gris" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="600dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/F"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="25dp"
+            android:src="@drawable/tamborcinco" />
+
+        <ImageButton
+            android:id="@+id/S"
+            android:layout_width="125dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/tamborcuatro" />
+
+        <ImageButton
+            android:id="@+id/L"
+            android:layout_width="125dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/tamborcuatro" />
+
+        <ImageButton
+            android:id="@+id/Si"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:src="@drawable/tamborseis" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/R"
+            android:layout_width="125dp"
+            android:layout_height="70dp"
+            android:src="@drawable/tambordos" />
+
+
+        <ImageButton
+            android:id="@+id/D"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:src="@drawable/tamboruno" />
+
+        <ImageButton
+            android:id="@+id/M"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:src="@drawable/tambortres" />
+
+    </LinearLayout>
+
+</LinearLayout>
