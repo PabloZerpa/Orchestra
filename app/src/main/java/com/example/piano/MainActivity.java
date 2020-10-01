@@ -1,25 +1,26 @@
 package com.example.piano;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
-//Agregar animacion cuerdas
-//Guitarra electrica
-//Arreglar imagen de los tambores
-//Agregarlo a git
-
 public class MainActivity extends AppCompatActivity
 {
     ImageButton botonPiano,botonGuitarra,botonBateria,botonFlauta;
+
+    ObjectAnimator animatorX, animatorAlpha, animatorRotation;
+    AnimatorSet animatorSet;
+
+    private static long dura = 2000;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         botonPiano = findViewById(R.id.piano);
         botonPiano.setOnClickListener(new View.OnClickListener() {
@@ -54,26 +55,24 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(intent, 0);
             }
         });
+
+        AnimacionPrueba(botonPiano, 50f);
+        AnimacionPrueba(botonGuitarra, 450f);
+        AnimacionPrueba(botonBateria, 50f);
+        AnimacionPrueba(botonFlauta, 450f);
+
     }
 
-    public void irPiano()
+    public void AnimacionPrueba(ImageButton boton, float desplazamiento)
     {
-        Intent i = new Intent(this,Piano.class);
-        startActivity(i);
-    }
-    public void irGuitarra()
-    {
-        Intent i = new Intent(this,Guitarra.class);
-        startActivity(i);
-    }
-    public void irBateria()
-    {
-        Intent i = new Intent(this,Bateria.class);
-        startActivity(i);
-    }
-    public void irFlauta()
-    {
-        Intent i = new Intent(this,Flauta.class);
-        startActivity(i);
+        animatorX = ObjectAnimator.ofFloat(boton,"x",desplazamiento);
+        animatorX.setDuration(dura);
+        animatorAlpha = ObjectAnimator.ofFloat(boton,View.ALPHA,0.0f, 1.0f);
+        animatorAlpha.setDuration(dura);
+        animatorRotation = ObjectAnimator.ofFloat(boton,"rotation",0f, 360f);
+        animatorRotation.setDuration(dura);
+        animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animatorX,animatorAlpha,animatorRotation);
+        animatorSet.start();
     }
 }

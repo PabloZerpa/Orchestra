@@ -54,8 +54,6 @@ public class Guitarra extends Activity
         }
     }
 
-
-
     public void inicializarPlayer(int n)
     {
         MediaPlayer mediaplayer = MediaPlayer.create(this, guitarra[n]);
