@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textoboton">18sp</dimen>
-
-    <dimen name="anchoNota">100dp</dimen>
-    <dimen name="altoNota">200dp</dimen>
-
-    <dimen name="anchoControl">40dp</dimen>
-    <dimen name="altoControl">40dp</dimen>
-
-    <dimen name="margenNotas">40dp</dimen>
-    <dimen name="margenboton">40dp</dimen>
-
-    <dimen name="anchoPantalla">400</dimen>
-    <dimen name="altoPantalla">75</dimen>
 
 </resources>

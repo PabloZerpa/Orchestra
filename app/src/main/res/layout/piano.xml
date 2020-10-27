@@ -5,33 +5,14 @@
     android:id="@+id/Principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negra"
+    android:background="@color/Black"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--
-    <TextView
-        android:id="@+id/Pantalla"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/Blanca"
-        android:gravity="center"
-        android:text="-" />
-        -->
-
     <LinearLayout
         android:id="@+id/AreaControl"
-        style="@style/Control"
-        android:layout_width="600dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@color/Control"
-        android:gravity="center"
-        android:orientation="horizontal">
+        style="@style/Control">
 
         <LinearLayout
             android:id="@+id/GrupoBotones"
@@ -41,193 +22,102 @@
 
             <LinearLayout
                 android:id="@+id/Botones1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                style="@style/SubControl" >
 
                 <Button
                     android:id="@+id/grabar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/Rojo"
-                    android:text="Grabar"
-                    style="@style/botonRojo"/>
+                    style="@style/botonRojo" />
 
                 <Button
                     android:id="@+id/pausar"
-                    style="@style/botonAzul"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/Azul"
-                    android:text="Pausar" />
+                    style="@style/botonAzul" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/Botones2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                style="@style/SubControl">
 
                 <Button
                     android:id="@+id/mostrar"
-                    style="@style/botonAmarillo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/Amarillo"
-                    android:text="Notas" />
+                    style="@style/botonAmarillo" />
 
                 <Button
                     android:id="@+id/bucle"
-                    style="@style/botonVerde"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/Verde"
-                    android:text="Reproducir" />
+                    style="@style/botonVerde" />
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Control"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/SubControl"
             android:gravity="center"
             android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/instrumentos"
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@color/Blanca" />
+                style="@style/Spinner" />
 
             <SeekBar
                 android:id="@+id/volumen"
-                style="@style/boton_volumen"
-                android:layout_width="325dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:background="@color/Gris" />
+                style="@style/Volumen" />
+
         </LinearLayout>
 
     </LinearLayout>
 
     <TableRow
         android:id="@+id/Notas"
-        style="@style/Notas"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        style="@style/layoutNotas" >
 
         <ImageButton
             android:id="@+id/D"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/ni" />
+            style="@style/Nota1" />
 
         <ImageButton
             android:id="@+id/Ds"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_weight="200"
-            android:src="@drawable/na" />
+            style="@style/NotaAlt" />
 
         <ImageButton
             android:id="@+id/R"
-            style="@style/nota"
-            android:layout_width="19dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/nm" />
+            style="@style/Nota2" />
 
         <ImageButton
             android:id="@+id/Rs"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/na" />
+            style="@style/NotaAlt" />
 
         <ImageButton
             android:id="@+id/M"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:src="@drawable/nd" />
+            style="@style/Nota3" />
 
         <ImageButton
             android:id="@+id/F"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/ni" />
+            style="@style/Nota1" />
 
         <ImageButton
             android:id="@+id/Fs"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/na" />
+            style="@style/NotaAlt" />
 
         <ImageButton
             android:id="@+id/S"
-            style="@style/nota"
-            android:layout_width="19dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/nm" />
+            style="@style/Nota2" />
 
         <ImageButton
             android:id="@+id/Ss"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/na" />
+            style="@style/NotaAlt" />
 
         <ImageButton
             android:id="@+id/L"
-            style="@style/nota"
-            android:layout_width="19dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/nm" />
+            style="@style/Nota2" />
 
         <ImageButton
             android:id="@+id/Ls"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/na" />
+            style="@style/NotaAlt" />
 
         <ImageButton
             android:id="@+id/Si"
-            style="@style/nota"
-            android:layout_width="20dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:src="@drawable/nd" />
+            style="@style/Nota2" />
 
     </TableRow>
 

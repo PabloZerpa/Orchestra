@@ -5,8 +5,14 @@
     <string name="Bateria">Bateria</string>
     <string name="Flauta">Flauta</string>
 
+    <string name="Grabar">Grabar</string>
+    <string name="Pausar">Pausar</string>
+    <string name="Reproducir">Reproducir</string>
+    <string name="Notas">Notas</string>
+
     <string name="Volumen">Volumen</string>
     <string name="Instrumento">Instrumentos</string>
+    <string name="Titulo">Elige un instrumento</string>
 
     <string-array name="Instrumentos">
         <item>Piano</item>

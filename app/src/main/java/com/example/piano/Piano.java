@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -27,6 +28,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
+
+// Creo un ARRAY/VECTOR/LIST de mediaplayer
+// Ir guardando cada nota presionada
+// Luego reproducir en bucle el ARRAY/VECTOR/LIST en orden
 
 public class Piano extends Activity
 {

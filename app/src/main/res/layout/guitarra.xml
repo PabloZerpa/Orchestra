@@ -11,68 +11,41 @@
 
     <SeekBar
         android:id="@+id/volumen"
-        style="@style/boton_volumen"
-        android:layout_width="325dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="20dp"
+        style="@style/Volumen"
         android:background="@color/Brown" />
 
     <LinearLayout
         android:id="@+id/Mastil"
-        android:layout_width="700dp"
-        android:layout_height="160dp"
-        android:orientation="horizontal">
+        style="@style/Mastil">
 
         <LinearLayout
             android:id="@+id/Cuerdas"
-            android:layout_width="650dp"
-            android:layout_height="160dp"
-            android:background="@color/Beige"
-            android:orientation="vertical">
+            style="@style/LayoutCuerdas">
 
             <Button
                 android:id="@+id/M"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
+                style="@style/Cuerda"
+                android:layout_marginTop="5dp"/>
 
             <Button
                 android:id="@+id/Si"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
+                style="@style/Cuerda" />
 
             <Button
                 android:id="@+id/S"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
+                style="@style/Cuerda" />
 
             <Button
                 android:id="@+id/R"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
+                style="@style/Cuerda" />
 
             <Button
                 android:id="@+id/L"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
+                style="@style/Cuerda" />
 
             <Button
                 android:id="@+id/M2"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/Gris" />
-
+                style="@style/Cuerda" />
         </LinearLayout>
 
         <LinearLayout

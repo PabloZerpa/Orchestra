@@ -1,5 +1,7 @@
 package com.example.piano;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
@@ -11,7 +13,6 @@ import android.widget.SeekBar;
 
 public class Guitarra extends Activity
 {
-
     private Button[] botonNota = new Button[6];
     private int[] botonesId = {R.id.M,R.id.Si,R.id.S,R.id.R,R.id.L,R.id.M2};
     private int[] guitarra = {R.raw.guitarram, R.raw.guitarrasi, R.raw.guitarras, R.raw.guitarrar,R.raw.guitarral,R.raw.guitarram};
@@ -85,6 +86,5 @@ public class Guitarra extends Activity
         Nota(3);
         Nota(4);
         Nota(5);
-
     }
 }

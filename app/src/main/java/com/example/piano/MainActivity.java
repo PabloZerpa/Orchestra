@@ -12,10 +12,8 @@ public class MainActivity extends AppCompatActivity
 {
     ImageButton botonPiano,botonGuitarra,botonBateria,botonFlauta;
 
-    ObjectAnimator animatorX, animatorAlpha, animatorRotation;
+    ObjectAnimator animatorX, animatorAlpha, animatorY;
     AnimatorSet animatorSet;
-
-    private static long dura = 2000;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,23 +54,22 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        AnimacionPrueba(botonPiano, 50f);
-        AnimacionPrueba(botonGuitarra, 450f);
-        AnimacionPrueba(botonBateria, 50f);
-        AnimacionPrueba(botonFlauta, 450f);
+        Animacion(botonPiano, 50f);
+        Animacion(botonGuitarra, 50f);
+        Animacion(botonBateria, -25f);
+        Animacion(botonFlauta, -25f);
 
     }
 
-    public void AnimacionPrueba(ImageButton boton, float desplazamiento)
+    public void Animacion(ImageButton boton, float desplazamiento)
     {
-        animatorX = ObjectAnimator.ofFloat(boton,"x",desplazamiento);
-        animatorX.setDuration(dura);
+        animatorY = ObjectAnimator.ofFloat(boton,"y",desplazamiento);
+        long dura = 2000;
+        animatorY.setDuration(dura);
         animatorAlpha = ObjectAnimator.ofFloat(boton,View.ALPHA,0.0f, 1.0f);
         animatorAlpha.setDuration(dura);
-        animatorRotation = ObjectAnimator.ofFloat(boton,"rotation",0f, 360f);
-        animatorRotation.setDuration(dura);
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animatorX,animatorAlpha,animatorRotation);
+        animatorSet.playTogether(animatorY,animatorAlpha);
         animatorSet.start();
     }
 }

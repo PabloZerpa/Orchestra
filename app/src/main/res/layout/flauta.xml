@@ -3,27 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/Negra"
+    android:background="@color/Black"
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/AreaControl"
-        style="@style/Control"
-        android:background="@color/Control"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-        <SeekBar
-            android:id="@+id/volumen"
-            style="@style/boton_volumen"
-            android:layout_width="325dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:background="@color/Gris" />
-
-    </LinearLayout>
+    <SeekBar
+        android:id="@+id/volumen"
+        style="@style/Volumen"
+        android:background="@color/Control" />
 
     <LinearLayout
         android:id="@+id/Flauta"
@@ -34,53 +21,31 @@
 
         <ImageButton
             android:id="@+id/D"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
-
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/R"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/M"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/F"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/S"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/L"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
         <ImageButton
             android:id="@+id/Si"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/botonflauta" />
+            style="@style/NotaFlauta" />
 
     </LinearLayout>
 

@@ -5,66 +5,173 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="nota">
-        <item name="android:onClick">Sonar</item>
+    <style name="LayoutInstrumentos">
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
-    <style name="Notas">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">bottom</item>
+    <style name="Titulo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30sp</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:layout_margin">@dimen/margenNotas</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:text">@string/Titulo</item>
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="Control">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">600dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@color/Control</item>
     </style>
 
-    <style name="botones_Control">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/anchoControl</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/altoControl</item>
-        <item name="android:layout_margin">@dimen/margenboton</item>
-        <item name="android:textSize">@dimen/textoboton</item>
-        <item name="android:onClick">Instrumento</item>
-    </style>
-
-    <style name="boton_volumen">
-        <item name="android:onClick">Volumen</item>
-    </style>
-
-    <style name="Pantalla">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:minWidth">@dimen/anchoPantalla</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/altoPantalla</item>
-        <item name="android:layout_margin">@dimen/margenboton</item>
-        <item name="android:textSize">30sp</item>
-    </style>
-
-    <style name="botonAmarillo">
-        <item name="android:onClick">Mostrar</item>
+    <style name="SubControl">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="botonRojo">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:background">@color/Red</item>
+        <item name="android:text">@string/Grabar</item>
         <item name="android:onClick">Grabar</item>
     </style>
 
     <style name="botonAzul">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:background">@color/Blue</item>
+        <item name="android:text">@string/Pausar</item>
         <item name="android:onClick">Pausar</item>
     </style>
 
+    <style name="botonAmarillo">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:background">@color/Yellow</item>
+        <item name="android:text">@string/Notas</item>
+        <item name="android:onClick">Notas</item>
+    </style>
+
     <style name="botonVerde">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:background">@color/Green</item>
+        <item name="android:text">@string/Reproducir</item>
         <item name="android:onClick">Bucle</item>
+    </style>
+
+    <style name="Spinner">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@color/White</item>
+    </style>
+
+    <style name="Volumen">
+        <item name="android:layout_width">325dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@color/Gray</item>
+        <item name="android:onClick">Volumen</item>
+    </style>
+
+    <style name="layoutNotas">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Nota1">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:src">@drawable/ni</item>
+        <item name="android:onClick">Sonar</item>
+    </style>
+
+    <style name="Nota2">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:src">@drawable/nm</item>
+        <item name="android:onClick">Sonar</item>
+    </style>
+
+    <style name="Nota3">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:src">@drawable/nd</item>
+        <item name="android:onClick">Sonar</item>
+    </style>
+
+    <style name="NotaAlt">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:src">@drawable/na</item>
+        <item name="android:onClick">Sonar</item>
+    </style>
+
+    <style name="Mastil">
+        <item name="android:layout_width">700dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LayoutCuerdas">
+        <item name="android:layout_width">650dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/Beige</item>
+    </style>
+
+    <style name="Cuerda">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:background">@color/Gray</item>
+        <item name="android:onClick">Sonar</item>
+    </style>
+
+    <style name="Tambor">
+        <item name="android:layout_width">125dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:onClick">Sonar</item>
+
+    </style>
+
+    <style name="NotaFlauta">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/botonflauta</item>
+        <item name="android:onClick">Sonar</item>
     </style>
 
 </resources>
