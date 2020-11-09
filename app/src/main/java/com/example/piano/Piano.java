@@ -4,17 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.transition.Fade;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,16 +17,14 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import java.util.LinkedList;
 
-import java.io.IOException;
-
-// Creo un ARRAY/VECTOR/LIST de mediaplayer
-// Ir guardando cada nota presionada
-// Luego reproducir en bucle el ARRAY/VECTOR/LIST en orden
+// Si no, crear un archivo .wav
+// Escribir con flujos de datos las notas pulsadas mientras grabacion = true
+// Cerra el archivo y guardarlo al ejecutar el boton pausa
+// Reproducirlo en bucle
 
 public class Piano extends Activity
 {
@@ -48,14 +41,13 @@ public class Piano extends Activity
     private int[] trompeta = {R.raw.trompetad, R.raw.trompetas, R.raw.trompetar, R.raw.trompetars,R.raw.trompetam, R.raw.trompetaf,
             R.raw.trompetafs, R.raw.trompetas,R.raw.trompetass, R.raw.trompetal, R.raw.trompetals, R.raw.trompetasi};
 
-    //private MediaPlayer reproducir;
-    private MediaRecorder grabacion;
-    private String outputFile = null;
-    //private File archivo;
-
     private AudioManager audio;
     private String instrumentoElegido = "Piano";
     private String[] valores = {"Piano","Guitarra","Bateria","Flauta","Trompeta"};
+    private boolean estadoGrabacion = false, estadoReproduccion = false;
+    private int  posicion = 0;
+
+    LinkedList z = new LinkedList();
 
     //--------------------Imagenes con las notas------------------------------------
     private int[] imagenConNotas = {R.drawable.ndo,R.drawable.nds,R.drawable.nre,R.drawable.nrs,R.drawable.nmi,R.drawable.nfa,R.drawable.nfs,R.drawable.nsol,
@@ -293,22 +285,32 @@ public class Piano extends Activity
             case "Piano":
                 MediaPlayer mediaplayer = MediaPlayer.create(this, piano[n]);
                 mediaplayer.start();
+                if(estadoGrabacion)
+                    z.add(mediaplayer);
                 break;
             case "Guitarra":
                 mediaplayer = MediaPlayer.create(this, guitarra[n]);
                 mediaplayer.start();
+                if(estadoGrabacion)
+                    z.add(mediaplayer);
                 break;
             case "Bateria":
                 mediaplayer = MediaPlayer.create(this, bateria[n]);
                 mediaplayer.start();
+                if(estadoGrabacion)
+                    z.add(mediaplayer);
                 break;
             case "Flauta":
                 mediaplayer = MediaPlayer.create(this, flauta[n]);
                 mediaplayer.start();
+                if(estadoGrabacion)
+                    z.add(mediaplayer);
                 break;
             case "Trompeta":
                 mediaplayer = MediaPlayer.create(this, trompeta[n]);
                 mediaplayer.start();
+                if(estadoGrabacion)
+                    z.add(mediaplayer);
                 break;
         }
     }
@@ -319,25 +321,8 @@ public class Piano extends Activity
         rojo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Grabacion.wav";
-                // Se crea una instancia de MediaRecorder
-                grabacion = new MediaRecorder();
-                // Configuramos las fuentes de entrada
-                grabacion.setAudioSource(MediaRecorder.AudioSource.MIC);
-                // Seleccionamos el formato de salida
-                grabacion.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
-                // Seleccionamos el codec de audio
-                grabacion.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-                // Especificamos el fichero de salida
-                grabacion.setOutputFile(outputFile);
-                try
-                {
-                    grabacion.prepare();
-                    grabacion.start();
-                } catch (IllegalStateException | IOException e)
-                {
-                    e.printStackTrace();
-                }
+                estadoGrabacion = true;
+                //Queue<Integer> cola=new LinkedList();
                 Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
             }
         });
@@ -351,13 +336,15 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-                if (grabacion != null)
+                if (estadoGrabacion)
                 {
-                    grabacion.stop();
-                    grabacion.reset();
-                    grabacion.release();
-                    grabacion = null;
-                    Toast.makeText(getApplicationContext(), "El audio  grabado con éxito", Toast.LENGTH_LONG).show();
+                    estadoGrabacion = false;
+                    Toast.makeText(getApplicationContext(), "La grabacion fue pausada", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "El audio fue grabado con éxito", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    //Cambiar la variable de control para parar el bucle
+                    Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -371,26 +358,61 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-                MediaPlayer m = new MediaPlayer();
-                try
+                if(estadoReproduccion == false)
                 {
-                    m.setDataSource(outputFile);
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
+                    for (int i = 0; i < z.size(); i++) {
+                        final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                        mediaplayer.start();
+                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                //Cuando acabe hara esta accion
+                                mp = mediaplayer;
+                                mp.start();
+                            }
+                        });
+                    }
+                    Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
+                    estadoReproduccion = true;
                 }
-                try
-                {
-                    m.prepare();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-                m.start();
-                m.setLooping(true);
-                Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
+                else
+                    estadoReproduccion = false;
             }
         });
+    }
+
+    public void destruir(MediaPlayer mp)
+    {
+        if(mp!=null)
+            mp.release();
+    }
+
+    public void iniciar(MediaPlayer mp) {
+        //destruir(mp);
+        //mp = MediaPlayer.create(this,z.get(i));
+        mp.start();
+        mp.setLooping(true);
+    }
+
+    public void pausar(MediaPlayer mp) {
+        if(mp != null && mp.isPlaying()) {
+            posicion = mp.getCurrentPosition();
+            mp.pause();
+        }
+    }
+
+    public void continuar(MediaPlayer mp) {
+        if(mp != null && mp.isPlaying()==false) {
+            mp.seekTo(posicion);
+            mp.start();
+        }
+    }
+
+    public void detener(MediaPlayer mp) {
+        if(mp != null) {
+            mp.stop();
+            posicion = 0;
+        }
     }
 
     public void Nota(final int i)
@@ -439,3 +461,69 @@ public class Piano extends Activity
 
     }
 }
+
+/*
+        mediaPlayer = MediaPlayer.create(this, sounds[0]);
+        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.start();
+
+        @Override
+    public void onCompletion(MediaPlayer mp) {
+        play();
+    }
+
+    private void play() {
+        sound++;
+        if (sounds.length <= sound){
+            //Termina reproducción de todos los audios.
+            return;
+        }
+
+        AssetFileDescriptor afd = this.getResources().openRawResourceFd(sounds[sound]);
+
+        try {
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+            afd.close();
+        }
+        catch (IllegalArgumentException e) {
+            Log.e(TAG, "IllegalArgumentException Unable to play audio : " + e.getMessage());
+        }
+        catch (IllegalStateException e) {
+            Log.e(TAG, "IllegalStateException Unable to play audio : " + e.getMessage());
+        }
+        catch (IOException e) {
+            Log.e(TAG, "IOException Unable to play audio : " + e.getMessage());
+        }
+    }
+
+
+
+    public class CustomActivity extends Activity {
+
+    private MediaPlayer mp = null;
+
+    private void createAudio(int resource) {
+        if (this.mp != null) {
+            this.mp.stop();
+            this.mp.release();
+            this.mp = null;
+        }
+        return this.mp = MediaPlayer.create(this, resource);
+    }
+
+    public void onCustomClick() {
+        final MediaPlayer audio = this.createAudio(R.raw.audio2);
+        audio.start();
+    }
+
+    public void onAnotherCustomClick() {
+        final MediaPlayer audio = this.createAudio(R.raw.audio3);
+        audio.start();
+    }
+
+}
+
+*/

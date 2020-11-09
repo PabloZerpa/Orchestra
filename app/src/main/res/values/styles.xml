@@ -1,16 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar.Fullscreen"></style>
 
     <style name="LayoutInstrumentos">
         <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">120dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
     </style>
 
     <style name="Titulo">
@@ -48,6 +46,7 @@
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Red</item>
         <item name="android:text">@string/Grabar</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:onClick">Grabar</item>
     </style>
 
@@ -58,6 +57,7 @@
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Blue</item>
         <item name="android:text">@string/Pausar</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:onClick">Pausar</item>
     </style>
 
@@ -68,6 +68,7 @@
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Yellow</item>
         <item name="android:text">@string/Notas</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:onClick">Notas</item>
     </style>
 
@@ -78,6 +79,7 @@
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Green</item>
         <item name="android:text">@string/Reproducir</item>
+        <item name="android:textColor">@color/Black</item>
         <item name="android:onClick">Bucle</item>
     </style>
 
@@ -87,6 +89,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:background">@color/White</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="Volumen">

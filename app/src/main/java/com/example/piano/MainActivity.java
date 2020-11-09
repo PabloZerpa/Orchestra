@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity
 {
     ImageButton botonPiano,botonGuitarra,botonBateria,botonFlauta;
 
-    ObjectAnimator animatorX, animatorAlpha, animatorY;
+    ObjectAnimator animatorAlpha, animatorY;
     AnimatorSet animatorSet;
 
     protected void onCreate(Bundle savedInstanceState)
@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Animacion(botonPiano, 50f);
-        Animacion(botonGuitarra, 50f);
-        Animacion(botonBateria, -25f);
-        Animacion(botonFlauta, -25f);
+        Animacion(botonPiano, 40f);
+        Animacion(botonGuitarra, 40f);
+        Animacion(botonBateria, -10f);
+        Animacion(botonFlauta, -10f);
 
     }
 

@@ -25,7 +25,8 @@
             android:id="@+id/guitarra"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/iconoguitarra" />
+            android:background="@color/Black"
+            android:src="@drawable/iconoguitarra2" />
 
     </LinearLayout>
 
@@ -38,13 +39,15 @@
             android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_marginRight="80dp"
-            android:src="@drawable/iconobateria" />
+            android:background="@color/Black"
+            android:src="@drawable/iconobateria2" />
 
         <ImageButton
             android:id="@+id/flauta"
-            android:layout_width="80dp"
-            android:layout_height="120dp"
-            android:src="@drawable/iconoflauta" />
+            android:layout_width="70dp"
+            android:layout_height="130dp"
+            android:background="@color/Black"
+            android:src="@drawable/iconoflauta2" />
     </LinearLayout>
 
 </LinearLayout>
