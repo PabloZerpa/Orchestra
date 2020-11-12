@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
+//Añadir rango al seekbar
+//Mejorar la reproduccion de las notas grabadas
+//Mejorar la UI
+//Añadir presentacion
+
 public class MainActivity extends AppCompatActivity
 {
     ImageButton botonPiano,botonGuitarra,botonBateria,botonFlauta;

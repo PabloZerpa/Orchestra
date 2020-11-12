@@ -1,8 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.NoActionBar.Fullscreen"></style>
-
     <style name="LayoutInstrumentos">
         <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">120dp</item>
@@ -88,8 +85,9 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">10dp</item>
-        <item name="android:background">@color/White</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/Gray</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="Volumen">
