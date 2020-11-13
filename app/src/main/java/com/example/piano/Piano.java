@@ -358,27 +358,33 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-                if(estadoReproduccion == false)
-                {
-                    for (int i = 0; i < z.size(); i++) {
-                        final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                        mediaplayer.start();
-                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                //Cuando acabe hara esta accion
-                                mp = mediaplayer;
-                                mp.start();
-                            }
-                        });
-                    }
-                    Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
-                    estadoReproduccion = true;
-                }
-                else
-                    estadoReproduccion = false;
+                reproduccion();
             }
         });
+    }
+
+    public void reproduccion()
+    {
+        if(estadoReproduccion == false)
+        {
+            for (int i = 0; i < z.size(); i++) {
+                final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                final int x = i;
+                mediaplayer.start();
+                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Cuando acabe hara esta accion
+                        mp = (MediaPlayer) z.get(x+1);
+                        mp.start();
+                    }
+                });
+            }
+            Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
+            estadoReproduccion = true;
+        }
+        else
+            estadoReproduccion = false;
     }
 
     public void destruir(MediaPlayer mp)

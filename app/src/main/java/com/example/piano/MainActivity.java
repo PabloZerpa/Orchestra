@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
-//Añadir rango al seekbar
+//Añadir pantalla con nivel de volumen y nota
 //Mejorar la reproduccion de las notas grabadas
-//Mejorar la UI
-//Añadir presentacion
+
+//Mejorar la UI (agregar botones personalizados)
+//Mejorar presentacion (ejecutar finish despues de unos segundos)
 
 public class MainActivity extends AppCompatActivity
 {
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intro = new Intent(getApplicationContext(), Intro.class);
+        startActivity(intro);
 
         botonPiano = findViewById(R.id.piano);
         botonPiano.setOnClickListener(new View.OnClickListener() {
