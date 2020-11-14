@@ -67,9 +67,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/pantalla"
+        style="@style/Pantalla" />
+
+
     <TableRow
         android:id="@+id/Notas"
         style="@style/layoutNotas" >
+
+        <!-- **************************PRIMERA OCTAVA******************************** -->
 
         <ImageButton
             android:id="@+id/D"
@@ -117,6 +124,112 @@
 
         <ImageButton
             android:id="@+id/Si"
+            style="@style/Nota2" />
+
+        <Space
+            android:layout_width="2dp" />
+
+        <!-- **************************SEGUNDA OCTAVA******************************** -->
+
+        <ImageButton
+            android:id="@+id/D2"
+            style="@style/Nota1" />
+
+        <ImageButton
+            android:id="@+id/Ds2"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/R2"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Rs2"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/M2"
+            style="@style/Nota3" />
+
+        <ImageButton
+            android:id="@+id/F2"
+            style="@style/Nota1" />
+
+        <ImageButton
+            android:id="@+id/Fs2"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/S2"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Ss2"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/L2"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Ls2"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/Si2"
+            style="@style/Nota2" />
+
+        <Space
+            android:layout_width="2dp" />
+
+        <!-- **************************TERCERA OCTAVA******************************** -->
+
+        <ImageButton
+            android:id="@+id/D3"
+            style="@style/Nota1" />
+
+        <ImageButton
+            android:id="@+id/Ds3"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/R3"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Rs3"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/M3"
+            style="@style/Nota3" />
+
+        <ImageButton
+            android:id="@+id/F3"
+            style="@style/Nota1" />
+
+        <ImageButton
+            android:id="@+id/Fs3"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/S3"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Ss3"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/L3"
+            style="@style/Nota2" />
+
+        <ImageButton
+            android:id="@+id/Ls3"
+            style="@style/NotaAlt" />
+
+        <ImageButton
+            android:id="@+id/Si3"
             style="@style/Nota2" />
 
     </TableRow>

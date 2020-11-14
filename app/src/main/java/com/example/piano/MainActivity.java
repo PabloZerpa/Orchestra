@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
-//Añadir pantalla con nivel de volumen y nota
-//Mejorar la reproduccion de las notas grabadas
+//Mejorar posicion de los nombres de las notas
+//Agregar notas mas agudas / graves a las octavas
 
+//Mejorar la reproduccion de las notas grabadas
 //Mejorar la UI (agregar botones personalizados)
-//Mejorar presentacion (ejecutar finish despues de unos segundos)
 
 public class MainActivity extends AppCompatActivity
 {

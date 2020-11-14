@@ -1,6 +1,7 @@
 package com.example.piano;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,20 +18,22 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import java.util.LinkedList;
 
-// Si no, crear un archivo .wav
-// Escribir con flujos de datos las notas pulsadas mientras grabacion = true
-// Cerra el archivo y guardarlo al ejecutar el boton pausa
-// Reproducirlo en bucle
-
 public class Piano extends Activity
 {
     private ImageButton[] botonNota = new ImageButton[12];
+    private ImageButton[] botonNota2 = new ImageButton[12];
+    private ImageButton[] botonNota3 = new ImageButton[12];
+
     private int[] botonesId = {R.id.D,R.id.Ds,R.id.R,R.id.Rs,R.id.M,R.id.F,R.id.Fs,R.id.S,R.id.Ss,R.id.L,R.id.Ls,R.id.Si};
+    private int[] botonesId2 = {R.id.D2,R.id.Ds2,R.id.R2,R.id.Rs2,R.id.M2,R.id.F2,R.id.Fs2,R.id.S2,R.id.Ss2,R.id.L2,R.id.Ls2,R.id.Si2};
+    private int[] botonesId3 = {R.id.D3,R.id.Ds3,R.id.R3,R.id.Rs3,R.id.M3,R.id.F3,R.id.Fs3,R.id.S3,R.id.Ss3,R.id.L3,R.id.Ls3,R.id.Si3};
+
     private int[] piano = {R.raw.pianodo, R.raw.pianodos, R.raw.pianore, R.raw.pianores,R.raw.pianomi, R.raw.pianofa,
             R.raw.pianofas, R.raw.pianoso,R.raw.pianosos, R.raw.pianola, R.raw.pianolas, R.raw.pianossi};
     private int[] guitarra = {R.raw.guitarrad, R.raw.guitarrads, R.raw.guitarrar, R.raw.guitarrars,R.raw.guitarram, R.raw.guitarraf,
@@ -44,8 +48,8 @@ public class Piano extends Activity
     private AudioManager audio;
     private String instrumentoElegido = "Piano";
     private String[] valores = {"Piano","Guitarra","Bateria","Flauta","Trompeta"};
-    private boolean estadoGrabacion = false, estadoReproduccion = false;
-    private int  posicion = 0;
+    private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false;
+    private TextView pantalla;
 
     LinkedList z = new LinkedList();
 
@@ -61,7 +65,6 @@ public class Piano extends Activity
     //--------------------Imagenes presionadas sin las notas------------------------------------
     private int[] imagenPSinNotas = {R.drawable.nip,R.drawable.na,R.drawable.nmp,R.drawable.na,R.drawable.ndp,R.drawable.nip,R.drawable.na,R.drawable.nmp,R.drawable.na,
                                      R.drawable.nmp,R.drawable.na,R.drawable.ndp};
-    private boolean mostrar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -87,18 +90,20 @@ public class Piano extends Activity
     //-----------------------------Funcion para variar el volumen--------------------------------
     public void Volumen()
     {
+        pantalla = findViewById(R.id.pantalla);
         try
         {
-            SeekBar botonVolumen = findViewById(R.id.volumen);
+            final SeekBar botonVolumen = findViewById(R.id.volumen);
             audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
             botonVolumen.setMax(audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             botonVolumen.setProgress(audio.getStreamVolume(AudioManager.STREAM_MUSIC));
             botonVolumen.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
             {
                 @Override
-                public void onProgressChanged(SeekBar seekBar, int i, boolean b)
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
                 {
-                    audio.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
+                    audio.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+                    pantalla.setText("" + progress);
                 }
                 @Override
                 public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -111,6 +116,44 @@ public class Piano extends Activity
         {
             e.printStackTrace();
         }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        final SeekBar botonVolumen = (SeekBar) findViewById(R.id.volumen);
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+        {
+            int index = botonVolumen.getProgress();
+            botonVolumen.setProgress(index + 1);
+            return true;
+        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+        {
+            int index = botonVolumen.getProgress();
+            botonVolumen.setProgress(index - 1);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    //-----------------------------Funcion para elegir instrumento------------------------------------
+    public void Instrumento()
+    {
+        pantalla = findViewById(R.id.pantalla);
+        Spinner instrumento = findViewById(R.id.instrumentos);
+        instrumento.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valores));
+        instrumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id)
+            {
+                pantalla.setText((String) adapterView.getItemAtPosition(position));
+                instrumentoElegido = (String) adapterView.getItemAtPosition(position);
+                //Toast.makeText(adapterView.getContext(), (String) adapterView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
     }
 
     //----------------------------------Funcion para cambiar color a la tecla presionada-----------------------------
@@ -222,58 +265,25 @@ public class Piano extends Activity
             {
                 if(!mostrar)
                 {
-                    botonNota[0].setImageResource(imagenConNotas[0]);
-                    botonNota[1].setImageResource(imagenConNotas[1]);
-                    botonNota[2].setImageResource(imagenConNotas[2]);
-                    botonNota[3].setImageResource(imagenConNotas[3]);
-                    botonNota[4].setImageResource(imagenConNotas[4]);
-                    botonNota[5].setImageResource(imagenConNotas[5]);
-                    botonNota[6].setImageResource(imagenConNotas[6]);
-                    botonNota[7].setImageResource(imagenConNotas[7]);
-                    botonNota[8].setImageResource(imagenConNotas[8]);
-                    botonNota[9].setImageResource(imagenConNotas[9]);
-                    botonNota[10].setImageResource(imagenConNotas[10]);
-                    botonNota[11].setImageResource(imagenConNotas[11]);
-                    mostrar=true;
+                    for (int i = 0; i < 12; i++)
+                    {
+                        botonNota[i].setImageResource(imagenConNotas[i]);
+                        botonNota2[i].setImageResource(imagenConNotas[i]);
+                        botonNota3[i].setImageResource(imagenConNotas[i]);
+                    }
+                    mostrar = true;
                 }
                 else
                 {
-                    botonNota[0].setImageResource(imagenSinNotas[0]);
-                    botonNota[1].setImageResource(imagenSinNotas[1]);
-                    botonNota[2].setImageResource(imagenSinNotas[2]);
-                    botonNota[3].setImageResource(imagenSinNotas[3]);
-                    botonNota[4].setImageResource(imagenSinNotas[4]);
-                    botonNota[5].setImageResource(imagenSinNotas[5]);
-                    botonNota[6].setImageResource(imagenSinNotas[6]);
-                    botonNota[7].setImageResource(imagenSinNotas[7]);
-                    botonNota[8].setImageResource(imagenSinNotas[8]);
-                    botonNota[9].setImageResource(imagenSinNotas[9]);
-                    botonNota[10].setImageResource(imagenSinNotas[10]);
-                    botonNota[11].setImageResource(imagenSinNotas[11]);
-                    mostrar=false;
+                    for (int i = 0; i < 12; i++)
+                    {
+                        botonNota[i].setImageResource(imagenSinNotas[i]);
+                        botonNota2[i].setImageResource(imagenSinNotas[i]);
+                        botonNota3[i].setImageResource(imagenSinNotas[i]);
+                    }
+                    mostrar = false;
                 }
             }
-        });
-    }
-
-    //-----------------------------Funcion para elegir instrumento------------------------------------
-    public void Instrumento()
-    {
-        //private TextView pantalla;
-        Spinner instrumento = findViewById(R.id.instrumentos);
-        instrumento.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, valores));
-        instrumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id)
-            {
-                //pantalla.setText((String) adapterView.getItemAtPosition(position));
-                instrumentoElegido = (String) adapterView.getItemAtPosition(position);
-                //Toast.makeText(adapterView.getContext(), (String) adapterView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
@@ -343,8 +353,12 @@ public class Piano extends Activity
                     //Toast.makeText(getApplicationContext(), "El audio fue grabado con éxito", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    //Cambiar la variable de control para parar el bucle
-                    Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
+                    //Cambiar la variable de control para detener el bucle
+                    if(estadoReproduccion)
+                    {
+                        estadoReproduccion = false;
+                        Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -358,33 +372,37 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-                reproduccion();
+                if (!estadoReproduccion)
+                    estadoReproduccion = true;
+                else
+                    estadoReproduccion = false;
+
+                while(!estadoReproduccion)
+                {
+                    for (int i = 0; i < z.size(); i++)
+                    {
+                        final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                        final int x = i;
+
+                        mediaplayer.start();
+
+                        /*
+                        //if (mediaplayer.isPlaying() == false)
+                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                        {
+                            @Override
+                            public void onCompletion(MediaPlayer mp)
+                            {
+                                //Cuando acabe hara esta accion
+                                mp = (MediaPlayer) z.get(x);
+                                mp.start();
+                            }
+                        });*/
+                    }
+                    Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
+                }
             }
         });
-    }
-
-    public void reproduccion()
-    {
-        if(estadoReproduccion == false)
-        {
-            for (int i = 0; i < z.size(); i++) {
-                final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                final int x = i;
-                mediaplayer.start();
-                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        //Cuando acabe hara esta accion
-                        mp = (MediaPlayer) z.get(x+1);
-                        mp.start();
-                    }
-                });
-            }
-            Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
-            estadoReproduccion = true;
-        }
-        else
-            estadoReproduccion = false;
     }
 
     public void destruir(MediaPlayer mp)
@@ -402,14 +420,14 @@ public class Piano extends Activity
 
     public void pausar(MediaPlayer mp) {
         if(mp != null && mp.isPlaying()) {
-            posicion = mp.getCurrentPosition();
+            //posicion = mp.getCurrentPosition();
             mp.pause();
         }
     }
 
     public void continuar(MediaPlayer mp) {
         if(mp != null && mp.isPlaying()==false) {
-            mp.seekTo(posicion);
+            //mp.seekTo(posicion);
             mp.start();
         }
     }
@@ -417,12 +435,14 @@ public class Piano extends Activity
     public void detener(MediaPlayer mp) {
         if(mp != null) {
             mp.stop();
-            posicion = 0;
+            //posicion = 0;
         }
     }
 
     public void Nota(final int i)
     {
+        pantalla = findViewById(R.id.pantalla);
+
         botonNota[i].setOnTouchListener(new View.OnTouchListener()
         {
             @Override
@@ -431,8 +451,55 @@ public class Piano extends Activity
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
                     //boton presionado
-                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11){
                         Presion(i);
+                        pantalla.setText(getName(i));
+                    }
+                    inicializarPlayer(i,instrumentoElegido);
+                } else if (event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    //boton liberado
+                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                        Soltar(i);
+                }
+                return true;
+            }
+        });
+        botonNota2[i].setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //boton presionado
+                    if (i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                    {
+                        Presion(i);
+                        pantalla.setText(getName(i));
+                    }
+                    inicializarPlayer(i,instrumentoElegido);
+                } else if (event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    //boton liberado
+                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                        Soltar(i);
+                }
+                return true;
+            }
+        });
+        botonNota3[i].setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    //boton presionado
+                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                    {
+                        Presion(i);
+                        pantalla.setText(getName(i));
+                    }
                     inicializarPlayer(i,instrumentoElegido);
                 } else if (event.getAction() == MotionEvent.ACTION_UP)
                 {
@@ -445,11 +512,41 @@ public class Piano extends Activity
         });
     }
 
+    public String getName(int i)
+    {
+        if (i==0)
+            return "Do";
+        else if (i==1)
+            return "Do#";
+        else if (i==2)
+            return "Re";
+        else if (i==3)
+            return "Re#";
+        else if (i==4)
+            return "Mi";
+        else if (i==5)
+            return "Fa";
+        else if (i==6)
+            return "Fa#";
+        else if (i==7)
+            return "Sol";
+        else if (i==8)
+            return "Sol#";
+        else if (i==9)
+            return "La";
+        else if (i==10)
+            return "La#";
+        else
+            return "Si";
+    }
+
     public void Sonar()
     {
         for(int i=0; i<12; i++)
         {
             botonNota[i] = findViewById(botonesId[i]);
+            botonNota2[i] = findViewById(botonesId2[i]);
+            botonNota3[i] = findViewById(botonesId3[i]);
         }
 
         Nota(0);

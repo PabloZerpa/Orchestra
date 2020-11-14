@@ -98,17 +98,29 @@
         <item name="android:onClick">Volumen</item>
     </style>
 
+    <style name="Pantalla">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/White</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="layoutNotas">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
         <item name="android:orientation">vertical</item>
     </style>
 
     <style name="Nota1">
         <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:src">@drawable/ni</item>
         <item name="android:onClick">Sonar</item>
@@ -116,7 +128,7 @@
 
     <style name="Nota2">
         <item name="android:layout_width">18dp</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:src">@drawable/nm</item>
         <item name="android:onClick">Sonar</item>
@@ -124,7 +136,7 @@
 
     <style name="Nota3">
         <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginRight">1dp</item>
         <item name="android:src">@drawable/nd</item>
@@ -133,7 +145,7 @@
 
     <style name="NotaAlt">
         <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_height">180dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:src">@drawable/na</item>
         <item name="android:onClick">Sonar</item>
