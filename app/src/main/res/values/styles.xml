@@ -187,4 +187,20 @@
         <item name="android:onClick">Sonar</item>
     </style>
 
+    <style name="Logo">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/logo</item>
+    </style>
+
+    <style name="Nombre">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:text">@string/Orquesta</item>
+    </style>
+
 </resources>

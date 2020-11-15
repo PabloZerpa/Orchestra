@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -120,7 +119,7 @@ public class Piano extends Activity
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        final SeekBar botonVolumen = (SeekBar) findViewById(R.id.volumen);
+        final SeekBar botonVolumen = findViewById(R.id.volumen);
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
         {
             int index = botonVolumen.getProgress();
@@ -157,99 +156,227 @@ public class Piano extends Activity
     }
 
     //----------------------------------Funcion para cambiar color a la tecla presionada-----------------------------
-    public void Presion(int i)
+    public void Presion(int i, int n)
     {   // !mostrar == false
         if (!mostrar)
         {
-            if (i == 0)
-                botonNota[0].setImageResource(imagenPSinNotas[i]);
-            else if (i == 2)
-                botonNota[2].setImageResource(imagenPSinNotas[i]);
-            else if (i == 4)
-                botonNota[4].setImageResource(imagenPSinNotas[i]);
-            else if (i == 5)
-                botonNota[5].setImageResource(imagenPSinNotas[i]);
-            else if (i == 7)
-                botonNota[7].setImageResource(imagenPSinNotas[i]);
-            else if (i == 9)
-                botonNota[9].setImageResource(imagenPSinNotas[i]);
-            else if (i == 11)
-                botonNota[11].setImageResource(imagenPSinNotas[i]);
+            if(n == 1)
+            {
+                if (i == 0)
+                    botonNota[0].setImageResource(imagenPSinNotas[i]);
+                else if (i == 2)
+                    botonNota[2].setImageResource(imagenPSinNotas[i]);
+                else if (i == 4)
+                    botonNota[4].setImageResource(imagenPSinNotas[i]);
+                else if (i == 5)
+                    botonNota[5].setImageResource(imagenPSinNotas[i]);
+                else if (i == 7)
+                    botonNota[7].setImageResource(imagenPSinNotas[i]);
+                else if (i == 9)
+                    botonNota[9].setImageResource(imagenPSinNotas[i]);
+                else if (i == 11)
+                    botonNota[11].setImageResource(imagenPSinNotas[i]);
+            }
+            else if(n == 2)
+            {
+                if (i == 0)
+                    botonNota2[0].setImageResource(imagenPSinNotas[i]);
+                else if (i == 2)
+                    botonNota2[2].setImageResource(imagenPSinNotas[i]);
+                else if (i == 4)
+                    botonNota2[4].setImageResource(imagenPSinNotas[i]);
+                else if (i == 5)
+                    botonNota2[5].setImageResource(imagenPSinNotas[i]);
+                else if (i == 7)
+                    botonNota2[7].setImageResource(imagenPSinNotas[i]);
+                else if (i == 9)
+                    botonNota2[9].setImageResource(imagenPSinNotas[i]);
+                else if (i == 11)
+                    botonNota2[11].setImageResource(imagenPSinNotas[i]);
+            }
+            else if(n == 3)
+            {
+                if (i == 0)
+                    botonNota3[0].setImageResource(imagenPSinNotas[i]);
+                else if (i == 2)
+                    botonNota3[2].setImageResource(imagenPSinNotas[i]);
+                else if (i == 4)
+                    botonNota3[4].setImageResource(imagenPSinNotas[i]);
+                else if (i == 5)
+                    botonNota3[5].setImageResource(imagenPSinNotas[i]);
+                else if (i == 7)
+                    botonNota3[7].setImageResource(imagenPSinNotas[i]);
+                else if (i == 9)
+                    botonNota3[9].setImageResource(imagenPSinNotas[i]);
+                else if (i == 11)
+                    botonNota3[11].setImageResource(imagenPSinNotas[i]);
+            }
         }
         else {
-            if (i == 0)
-                botonNota[0].setImageResource(imagenPConNotas[i]);
-            else if (i == 1)
-                botonNota[1].setImageResource(imagenPConNotas[i]);
-            else if (i == 2)
-                botonNota[2].setImageResource(imagenPConNotas[i]);
-            else if (i == 3)
-                botonNota[3].setImageResource(imagenPConNotas[i]);
-            else if (i == 4)
-                botonNota[4].setImageResource(imagenPConNotas[i]);
-            else if (i == 5)
-                botonNota[5].setImageResource(imagenPConNotas[i]);
-            else if (i == 6)
-                botonNota[6].setImageResource(imagenPConNotas[i]);
-            else if (i == 7)
-                botonNota[7].setImageResource(imagenPConNotas[i]);
-            else if (i == 8)
-                botonNota[8].setImageResource(imagenPConNotas[i]);
-            else if (i == 9)
-                botonNota[9].setImageResource(imagenPConNotas[i]);
-            else if (i == 10)
-                botonNota[10].setImageResource(imagenPConNotas[i]);
-            else if (i == 11)
-                botonNota[11].setImageResource(imagenPConNotas[i]);
+            if(n == 1)
+            {
+                if (i == 0)
+                    botonNota[0].setImageResource(imagenPConNotas[i]);
+                else if (i == 2)
+                    botonNota[2].setImageResource(imagenPConNotas[i]);
+                else if (i == 4)
+                    botonNota[4].setImageResource(imagenPConNotas[i]);
+                else if (i == 5)
+                    botonNota[5].setImageResource(imagenPConNotas[i]);
+                else if (i == 7)
+                    botonNota[7].setImageResource(imagenPConNotas[i]);
+                else if (i == 9)
+                    botonNota[9].setImageResource(imagenPConNotas[i]);
+                else if (i == 11)
+                    botonNota[11].setImageResource(imagenPConNotas[i]);
+            }
+            else if(n == 2)
+            {
+                if (i == 0)
+                    botonNota2[0].setImageResource(imagenPConNotas[i]);
+                else if (i == 2)
+                    botonNota2[2].setImageResource(imagenPConNotas[i]);
+                else if (i == 4)
+                    botonNota2[4].setImageResource(imagenPConNotas[i]);
+                else if (i == 5)
+                    botonNota2[5].setImageResource(imagenPConNotas[i]);
+                else if (i == 7)
+                    botonNota2[7].setImageResource(imagenPConNotas[i]);
+                else if (i == 9)
+                    botonNota2[9].setImageResource(imagenPConNotas[i]);
+                else if (i == 11)
+                    botonNota2[11].setImageResource(imagenPConNotas[i]);
+            }
+            else if(n == 3)
+            {
+                if (i == 0)
+                    botonNota3[0].setImageResource(imagenPConNotas[i]);
+                else if (i == 2)
+                    botonNota3[2].setImageResource(imagenPConNotas[i]);
+                else if (i == 4)
+                    botonNota3[4].setImageResource(imagenPConNotas[i]);
+                else if (i == 5)
+                    botonNota3[5].setImageResource(imagenPConNotas[i]);
+                else if (i == 7)
+                    botonNota3[7].setImageResource(imagenPConNotas[i]);
+                else if (i == 9)
+                    botonNota3[9].setImageResource(imagenPConNotas[i]);
+                else if (i == 11)
+                    botonNota3[11].setImageResource(imagenPConNotas[i]);
+            }
         }
     }
 
     //----------------------------------Funcion para restablecer color a la tecla soltada-----------------------------
-    public void Soltar(int i)
+    public void Soltar(int i, int n)
     {
         if (!mostrar)
         {
-            if(i==0)
-                botonNota[0].setImageResource(imagenSinNotas[i]);
-            else if(i==2)
-                botonNota[2].setImageResource(imagenSinNotas[i]);
-            else if(i==4)
-                botonNota[4].setImageResource(imagenSinNotas[i]);
-            else if(i==5)
-                botonNota[5].setImageResource(imagenSinNotas[i]);
-            else if(i==7)
-                botonNota[7].setImageResource(imagenSinNotas[i]);
-            else if(i==9)
-                botonNota[9].setImageResource(imagenSinNotas[i]);
-            else if(i==11)
-                botonNota[11].setImageResource(imagenSinNotas[i]);
+            if(n == 1)
+            {
+                if (i == 0)
+                    botonNota[0].setImageResource(imagenSinNotas[i]);
+                else if (i == 2)
+                    botonNota[2].setImageResource(imagenSinNotas[i]);
+                else if (i == 4)
+                    botonNota[4].setImageResource(imagenSinNotas[i]);
+                else if (i == 5)
+                    botonNota[5].setImageResource(imagenSinNotas[i]);
+                else if (i == 7)
+                    botonNota[7].setImageResource(imagenSinNotas[i]);
+                else if (i == 9)
+                    botonNota[9].setImageResource(imagenSinNotas[i]);
+                else if (i == 11)
+                    botonNota[11].setImageResource(imagenSinNotas[i]);
+            }
+            else if(n == 2)
+            {
+                if (i == 0)
+                    botonNota2[0].setImageResource(imagenSinNotas[i]);
+                else if (i == 2)
+                    botonNota2[2].setImageResource(imagenSinNotas[i]);
+                else if (i == 4)
+                    botonNota2[4].setImageResource(imagenSinNotas[i]);
+                else if (i == 5)
+                    botonNota2[5].setImageResource(imagenSinNotas[i]);
+                else if (i == 7)
+                    botonNota2[7].setImageResource(imagenSinNotas[i]);
+                else if (i == 9)
+                    botonNota2[9].setImageResource(imagenSinNotas[i]);
+                else if (i == 11)
+                    botonNota2[11].setImageResource(imagenSinNotas[i]);
+            }
+            else if(n == 3)
+            {
+                if (i == 0)
+                    botonNota3[0].setImageResource(imagenSinNotas[i]);
+                else if (i == 2)
+                    botonNota3[2].setImageResource(imagenSinNotas[i]);
+                else if (i == 4)
+                    botonNota3[4].setImageResource(imagenSinNotas[i]);
+                else if (i == 5)
+                    botonNota3[5].setImageResource(imagenSinNotas[i]);
+                else if (i == 7)
+                    botonNota3[7].setImageResource(imagenSinNotas[i]);
+                else if (i == 9)
+                    botonNota3[9].setImageResource(imagenSinNotas[i]);
+                else if (i == 11)
+                    botonNota3[11].setImageResource(imagenSinNotas[i]);
+            }
         }
         else
         {
-            if(i==0)
-                botonNota[0].setImageResource(imagenConNotas[i]);
-            else if(i==1)
-                botonNota[1].setImageResource(imagenConNotas[i]);
-            else if(i==2)
-                botonNota[2].setImageResource(imagenConNotas[i]);
-            else if(i==3)
-                botonNota[3].setImageResource(imagenConNotas[i]);
-            else if(i==4)
-                botonNota[4].setImageResource(imagenConNotas[i]);
-            else if(i==5)
-                botonNota[5].setImageResource(imagenConNotas[i]);
-            else if(i==6)
-                botonNota[6].setImageResource(imagenConNotas[i]);
-            else if(i==7)
-                botonNota[7].setImageResource(imagenConNotas[i]);
-            else if(i==8)
-                botonNota[8].setImageResource(imagenConNotas[i]);
-            else if(i==9)
-                botonNota[9].setImageResource(imagenConNotas[i]);
-            else if(i==10)
-                botonNota[10].setImageResource(imagenConNotas[i]);
-            else if(i==11)
-                botonNota[11].setImageResource(imagenConNotas[i]);
+            if(n == 1)
+            {
+                if (i == 0)
+                    botonNota[0].setImageResource(imagenConNotas[i]);
+                else if (i == 2)
+                    botonNota[2].setImageResource(imagenConNotas[i]);
+                else if (i == 4)
+                    botonNota[4].setImageResource(imagenConNotas[i]);
+                else if (i == 5)
+                    botonNota[5].setImageResource(imagenConNotas[i]);
+                else if (i == 7)
+                    botonNota[7].setImageResource(imagenConNotas[i]);
+                else if (i == 9)
+                    botonNota[9].setImageResource(imagenConNotas[i]);
+                else if (i == 11)
+                    botonNota[11].setImageResource(imagenConNotas[i]);
+            }
+            else if(n == 2)
+            {
+                if (i == 0)
+                    botonNota2[0].setImageResource(imagenConNotas[i]);
+                else if (i == 2)
+                    botonNota2[2].setImageResource(imagenConNotas[i]);
+                else if (i == 4)
+                    botonNota2[4].setImageResource(imagenConNotas[i]);
+                else if (i == 5)
+                    botonNota2[5].setImageResource(imagenConNotas[i]);
+                else if (i == 7)
+                    botonNota2[7].setImageResource(imagenConNotas[i]);
+                else if (i == 9)
+                    botonNota2[9].setImageResource(imagenConNotas[i]);
+                else if (i == 11)
+                    botonNota2[11].setImageResource(imagenConNotas[i]);
+            }
+            else if(n == 3)
+            {
+                if (i == 0)
+                    botonNota3[0].setImageResource(imagenConNotas[i]);
+                else if (i == 2)
+                    botonNota3[2].setImageResource(imagenConNotas[i]);
+                else if (i == 4)
+                    botonNota3[4].setImageResource(imagenConNotas[i]);
+                else if (i == 5)
+                    botonNota3[5].setImageResource(imagenConNotas[i]);
+                else if (i == 7)
+                    botonNota3[7].setImageResource(imagenConNotas[i]);
+                else if (i == 9)
+                    botonNota3[9].setImageResource(imagenConNotas[i]);
+                else if (i == 11)
+                    botonNota3[11].setImageResource(imagenConNotas[i]);
+            }
         }
 
     }
@@ -372,19 +499,23 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-                if (!estadoReproduccion)
-                    estadoReproduccion = true;
-                else
-                    estadoReproduccion = false;
+                estadoReproduccion = !estadoReproduccion;
 
                 while(!estadoReproduccion)
                 {
+                    Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
+
                     for (int i = 0; i < z.size(); i++)
                     {
-                        final MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                        final int x = i;
+                        MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                        boolean x = true;
 
                         mediaplayer.start();
+                        while(x)
+                        {
+                            if(!mediaplayer.isPlaying())
+                                x = false;
+                        }
 
                         /*
                         //if (mediaplayer.isPlaying() == false)
@@ -399,13 +530,12 @@ public class Piano extends Activity
                             }
                         });*/
                     }
-                    Toast.makeText(getApplicationContext(), "Reproducción de audio", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    public void destruir(MediaPlayer mp)
+    /*public void destruir(MediaPlayer mp)
     {
         if(mp!=null)
             mp.release();
@@ -437,8 +567,9 @@ public class Piano extends Activity
             mp.stop();
             //posicion = 0;
         }
-    }
+    }*/
 
+    @SuppressLint("ClickableViewAccessibility")
     public void Nota(final int i)
     {
         pantalla = findViewById(R.id.pantalla);
@@ -451,8 +582,9 @@ public class Piano extends Activity
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
                     //boton presionado
-                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11){
-                        Presion(i);
+                    if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
+                    {
+                        Presion(i,1);
                         pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
@@ -460,7 +592,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i);
+                        Soltar(i,1);
                 }
                 return true;
             }
@@ -474,7 +606,7 @@ public class Piano extends Activity
                     //boton presionado
                     if (i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
-                        Presion(i);
+                        Presion(i,2);
                         pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
@@ -482,7 +614,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i);
+                        Soltar(i,2);
                 }
                 return true;
             }
@@ -497,7 +629,7 @@ public class Piano extends Activity
                     //boton presionado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
-                        Presion(i);
+                        Presion(i,3);
                         pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
@@ -505,7 +637,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i);
+                        Soltar(i,3);
                 }
                 return true;
             }

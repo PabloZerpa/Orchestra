@@ -2,6 +2,7 @@ package com.example.piano;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +15,7 @@ public class Intro extends Activity
 
     ImageView logo;
     TextView nombre;
-    ObjectAnimator animatorAlpha, animatorY;
+    ObjectAnimator animatorAlpha, animatorY, animatorRotation;
     AnimatorSet animatorSet;
     long duracion = 2000;
 
@@ -47,46 +48,23 @@ public class Intro extends Activity
         }, 4000);
     }
 
+    @SuppressLint("ObjectAnimatorBinding")
     public void Animacion(ImageView logo, float desplazamiento)
     {
-        animatorY = ObjectAnimator.ofFloat(logo,"y",desplazamiento);
-        animatorY.setDuration(duracion-1000);
-        animatorAlpha = ObjectAnimator.ofFloat(logo, View.ALPHA,0.0f, 1.0f);
-        animatorAlpha.setDuration(duracion-1000);
+        animatorY = ObjectAnimator.ofFloat(logo,"y",desplazamiento).setDuration(duracion);
+        animatorAlpha = ObjectAnimator.ofFloat(logo, View.ALPHA,0.0f, 1.0f).setDuration(duracion);
+        animatorRotation = ObjectAnimator.ofFloat(logo, "rotation",0,360).setDuration(duracion);
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animatorY,animatorAlpha);
+        animatorSet.playTogether(animatorY,animatorAlpha,animatorRotation);
         animatorSet.start();
     }
 
     public void Animacion(TextView nombre)
     {
         animatorAlpha = ObjectAnimator.ofFloat(nombre, View.ALPHA,0.0f, 1.0f);
-        animatorAlpha.setDuration(duracion);
+        animatorAlpha.setDuration(duracion-1000);
         animatorSet = new AnimatorSet();
         animatorSet.playTogether(animatorAlpha);
         animatorSet.start();
     }
 }
-
-
-
-/*
-public class Intro extends AppIntro
-{
-    @SuppressLint("ResourceAsColor")
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        addSlide(AppIntro2Fragment.newInstance("", "Orchest", R.drawable.logo, R.color.Blue));
-
-        new Handler().postDelayed(new Runnable()
-        {
-            public void run()
-            {
-                finish();
-            }
-        }, 4000);
-    }
-}
- */

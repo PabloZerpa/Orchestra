@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
-//Mejorar posicion de los nombres de las notas
+//Arreglar nombres de notas
 //Agregar notas mas agudas / graves a las octavas
-
-//Mejorar la reproduccion de las notas grabadas
 //Mejorar la UI (agregar botones personalizados)
 
 public class MainActivity extends AppCompatActivity
