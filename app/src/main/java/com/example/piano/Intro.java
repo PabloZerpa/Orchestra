@@ -28,7 +28,7 @@ public class Intro extends Activity
         nombre = findViewById(R.id.nombre);
         nombre.setVisibility(View.INVISIBLE);
 
-        Animacion(logo, 300f);
+        Animacion(logo, 350f);
 
         new Handler().postDelayed(new Runnable()
         {
@@ -45,7 +45,7 @@ public class Intro extends Activity
             {
                 finish();
             }
-        }, 4000);
+        }, 3500);
     }
 
     @SuppressLint("ObjectAnimatorBinding")
@@ -62,7 +62,7 @@ public class Intro extends Activity
     public void Animacion(TextView nombre)
     {
         animatorAlpha = ObjectAnimator.ofFloat(nombre, View.ALPHA,0.0f, 1.0f);
-        animatorAlpha.setDuration(duracion-1000);
+        animatorAlpha.setDuration(duracion-100);
         animatorSet = new AnimatorSet();
         animatorSet.playTogether(animatorAlpha);
         animatorSet.start();

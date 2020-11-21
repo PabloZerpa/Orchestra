@@ -10,6 +10,7 @@
     <color name="Beige">#C59A66</color>
     <color name="Brown">#8E5A1B</color>
     <color name="DarkBrown">#5C380C</color>
+    <color name="None">#00FFFFFF</color>
 
     <color name="Control">#000B4D</color>
 </resources>

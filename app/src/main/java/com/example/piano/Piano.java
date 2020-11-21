@@ -479,14 +479,12 @@ public class Piano extends Activity
                     Toast.makeText(getApplicationContext(), "La grabacion fue pausada", Toast.LENGTH_LONG).show();
                     //Toast.makeText(getApplicationContext(), "El audio fue grabado con éxito", Toast.LENGTH_LONG).show();
                 }
-                else {
-                    //Cambiar la variable de control para detener el bucle
-                    if(estadoReproduccion)
-                    {
-                        estadoReproduccion = false;
-                        Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
-                    }
-                }
+                /*
+                if(estadoReproduccion)
+                {
+                    estadoReproduccion = false;
+                    Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
+                }*/
             }
         });
     }
@@ -499,36 +497,41 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
+
                 estadoReproduccion = !estadoReproduccion;
 
-                while(!estadoReproduccion)
+                if(estadoReproduccion)
                 {
                     Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
 
                     for (int i = 0; i < z.size(); i++)
                     {
                         MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                        boolean x = true;
+                        final int x = i;
 
-                        mediaplayer.start();
-                        while(x)
-                        {
-                            if(!mediaplayer.isPlaying())
-                                x = false;
-                        }
+                        if(i==0)
+                            mediaplayer.start();
 
-                        /*
-                        //if (mediaplayer.isPlaying() == false)
                         mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
                         {
                             @Override
                             public void onCompletion(MediaPlayer mp)
                             {
-                                //Cuando acabe hara esta accion
-                                mp = (MediaPlayer) z.get(x);
-                                mp.start();
+                                if(x <= z.size())
+                                {
+                                    mp = (MediaPlayer) z.get(x + 1);
+                                    mp.start();
+                                }
                             }
-                        });*/
+                        });
+
+                        /*boolean playing = true;
+
+                        while(playing)
+                        {
+                            if(!mediaplayer.isPlaying())
+                                playing = false;
+                        }*/
                     }
                 }
             }
@@ -567,7 +570,20 @@ public class Piano extends Activity
             mp.stop();
             //posicion = 0;
         }
-    }*/
+    }
+
+    /*
+                        //if (mediaplayer.isPlaying() == false)
+                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                        {
+                            @Override
+                            public void onCompletion(MediaPlayer mp)
+                            {
+                                //Cuando acabe hara esta accion
+                                mp = (MediaPlayer) z.get(x);
+                                mp.start();
+                            }
+                        });*/
 
     @SuppressLint("ClickableViewAccessibility")
     public void Nota(final int i)
@@ -585,9 +601,9 @@ public class Piano extends Activity
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
                         Presion(i,1);
-                        pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
+                    pantalla.setText(getName(i));
                 } else if (event.getAction() == MotionEvent.ACTION_UP)
                 {
                     //boton liberado
@@ -607,9 +623,9 @@ public class Piano extends Activity
                     if (i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
                         Presion(i,2);
-                        pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
+                    pantalla.setText(getName(i));
                 } else if (event.getAction() == MotionEvent.ACTION_UP)
                 {
                     //boton liberado
@@ -630,9 +646,9 @@ public class Piano extends Activity
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
                         Presion(i,3);
-                        pantalla.setText(getName(i));
                     }
                     inicializarPlayer(i,instrumentoElegido);
+                    pantalla.setText(getName(i));
                 } else if (event.getAction() == MotionEvent.ACTION_UP)
                 {
                     //boton liberado
@@ -681,84 +697,11 @@ public class Piano extends Activity
             botonNota3[i] = findViewById(botonesId3[i]);
         }
 
-        Nota(0);
-        Nota(1);
-        Nota(2);
-        Nota(3);
-        Nota(4);
-        Nota(5);
-        Nota(6);
-        Nota(7);
-        Nota(8);
-        Nota(9);
-        Nota(10);
-        Nota(11);
+        for(int i=0; i<12; i++)
+        {
+            Nota(i);
+        }
+
 
     }
 }
-
-/*
-        mediaPlayer = MediaPlayer.create(this, sounds[0]);
-        mediaPlayer.setOnCompletionListener(this);
-        mediaPlayer.start();
-
-        @Override
-    public void onCompletion(MediaPlayer mp) {
-        play();
-    }
-
-    private void play() {
-        sound++;
-        if (sounds.length <= sound){
-            //Termina reproducción de todos los audios.
-            return;
-        }
-
-        AssetFileDescriptor afd = this.getResources().openRawResourceFd(sounds[sound]);
-
-        try {
-            mediaPlayer.reset();
-            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-            afd.close();
-        }
-        catch (IllegalArgumentException e) {
-            Log.e(TAG, "IllegalArgumentException Unable to play audio : " + e.getMessage());
-        }
-        catch (IllegalStateException e) {
-            Log.e(TAG, "IllegalStateException Unable to play audio : " + e.getMessage());
-        }
-        catch (IOException e) {
-            Log.e(TAG, "IOException Unable to play audio : " + e.getMessage());
-        }
-    }
-
-
-
-    public class CustomActivity extends Activity {
-
-    private MediaPlayer mp = null;
-
-    private void createAudio(int resource) {
-        if (this.mp != null) {
-            this.mp.stop();
-            this.mp.release();
-            this.mp = null;
-        }
-        return this.mp = MediaPlayer.create(this, resource);
-    }
-
-    public void onCustomClick() {
-        final MediaPlayer audio = this.createAudio(R.raw.audio2);
-        audio.start();
-    }
-
-    public void onAnotherCustomClick() {
-        final MediaPlayer audio = this.createAudio(R.raw.audio3);
-        audio.start();
-    }
-
-}
-
-*/

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/Black">
+    android:background="@drawable/fondomenu">
 
         <TextView
             android:id="@+id/inicio"
@@ -25,7 +25,7 @@
             android:id="@+id/guitarra"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@color/Black"
+            android:background="@color/None"
             android:src="@drawable/iconoguitarra2" />
 
     </LinearLayout>
@@ -39,14 +39,14 @@
             android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_marginRight="80dp"
-            android:background="@color/Black"
+            android:background="@color/None"
             android:src="@drawable/iconobateria2" />
 
         <ImageButton
             android:id="@+id/flauta"
             android:layout_width="70dp"
             android:layout_height="130dp"
-            android:background="@color/Black"
+            android:background="@color/None"
             android:src="@drawable/iconoflauta2" />
     </LinearLayout>
 
