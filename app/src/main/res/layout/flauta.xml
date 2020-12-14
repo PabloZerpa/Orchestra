@@ -13,40 +13,69 @@
         android:background="@color/Control" />
 
     <LinearLayout
-        android:id="@+id/Flauta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/D"
-            style="@style/NotaFlauta" />
+        <LinearLayout
+            android:id="@+id/Botones1"
+            style="@style/SubControl"
+            android:layout_height="180dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/R"
-            style="@style/NotaFlauta" />
+            <Button
+                android:id="@+id/grabar"
+                style="@style/botonRojo" />
 
-        <ImageButton
-            android:id="@+id/M"
-            style="@style/NotaFlauta" />
+            <Button
+                android:id="@+id/pausar"
+                style="@style/botonAzul" />
 
-        <ImageButton
-            android:id="@+id/F"
-            style="@style/NotaFlauta" />
+            <Button
+                android:id="@+id/bucle"
+                style="@style/botonAmarillo" />
 
-        <ImageButton
-            android:id="@+id/S"
-            style="@style/NotaFlauta" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/L"
-            style="@style/NotaFlauta" />
+        <LinearLayout
+            android:id="@+id/Flauta"
+            android:layout_width="100dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="125dp"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/Si"
-            style="@style/NotaFlauta" />
+            <ImageButton
+                android:id="@+id/D"
+                style="@style/NotaFlauta" />
 
+            <ImageButton
+                android:id="@+id/R"
+                style="@style/NotaFlauta" />
+
+            <ImageButton
+                android:id="@+id/M"
+                style="@style/NotaFlauta" />
+
+            <ImageButton
+                android:id="@+id/F"
+                style="@style/NotaFlauta" />
+
+            <ImageButton
+                android:id="@+id/S"
+                style="@style/NotaFlauta" />
+
+            <ImageButton
+                android:id="@+id/L"
+                style="@style/NotaFlauta" />
+
+            <ImageButton
+                android:id="@+id/Si"
+                style="@style/NotaFlauta" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

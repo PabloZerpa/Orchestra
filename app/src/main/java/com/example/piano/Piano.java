@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -53,11 +54,11 @@ public class Piano extends Activity
     LinkedList z = new LinkedList();
 
     //--------------------Imagenes con las notas------------------------------------
-    private int[] imagenConNotas = {R.drawable.ndo,R.drawable.nds,R.drawable.nre,R.drawable.nrs,R.drawable.nmi,R.drawable.nfa,R.drawable.nfs,R.drawable.nsol,
-                                    R.drawable.nss,R.drawable.nla,R.drawable.nls,R.drawable.nsi};
+    private int[] imagenConNotas = {R.drawable.ndo,R.drawable.ndos,R.drawable.nre,R.drawable.nres,R.drawable.nmi,R.drawable.nfa,R.drawable.nfas,R.drawable.nsol,
+                                    R.drawable.nss,R.drawable.nla,R.drawable.nlas,R.drawable.nsi};
     //--------------------Imagenes presionadas con las notas------------------------------------
-    private int[] imagenPConNotas = {R.drawable.ndop,R.drawable.nds,R.drawable.nrep,R.drawable.nrs,R.drawable.nmip,R.drawable.nfap,R.drawable.nfs,R.drawable.nsolp,
-            R.drawable.nss,R.drawable.nlap,R.drawable.nls,R.drawable.nsip};
+    private int[] imagenPConNotas = {R.drawable.ndop,R.drawable.ndos,R.drawable.nrep,R.drawable.nres,R.drawable.nmip,R.drawable.nfap,R.drawable.nfas,R.drawable.nsolp,
+            R.drawable.nss,R.drawable.nlap,R.drawable.nlas,R.drawable.nsip};
     //--------------------Imagenes sin las notas------------------------------------
     private int[] imagenSinNotas = {R.drawable.ni,R.drawable.na,R.drawable.nm,R.drawable.na,R.drawable.nd,R.drawable.ni,R.drawable.na,R.drawable.nm,R.drawable.na,
                                     R.drawable.nm,R.drawable.na,R.drawable.nd};
@@ -77,17 +78,17 @@ public class Piano extends Activity
             ActivityCompat .requestPermissions(Piano.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, 1000);
         }
 
-        Instrumento();
-        Volumen();
-        Sonar();
-        Mostrar();
-        Grabar();
-        Pausar();
-        Bucle();
+        instrumento();
+        volumen();
+        sonar();
+        mostrar();
+        grabar();
+        detener();
+        bucle();
     }
 
     //-----------------------------Funcion para variar el volumen--------------------------------
-    public void Volumen()
+    public void volumen()
     {
         pantalla = findViewById(R.id.pantalla);
         try
@@ -135,7 +136,7 @@ public class Piano extends Activity
     }
 
     //-----------------------------Funcion para elegir instrumento------------------------------------
-    public void Instrumento()
+    public void instrumento()
     {
         pantalla = findViewById(R.id.pantalla);
         Spinner instrumento = findViewById(R.id.instrumentos);
@@ -156,7 +157,7 @@ public class Piano extends Activity
     }
 
     //----------------------------------Funcion para cambiar color a la tecla presionada-----------------------------
-    public void Presion(int i, int n)
+    public void presion(int i, int n)
     {   // !mostrar == false
         if (!mostrar)
         {
@@ -268,7 +269,7 @@ public class Piano extends Activity
     }
 
     //----------------------------------Funcion para restablecer color a la tecla soltada-----------------------------
-    public void Soltar(int i, int n)
+    public void soltar(int i, int n)
     {
         if (!mostrar)
         {
@@ -382,7 +383,7 @@ public class Piano extends Activity
     }
 
     //----------------------------------Funcion para mostrar las notas en las teclas---------------------------
-    public void Mostrar()
+    public void mostrar()
     {
         Button amarillo = findViewById(R.id.mostrar);
         amarillo.setOnClickListener(new View.OnClickListener()
@@ -452,20 +453,30 @@ public class Piano extends Activity
         }
     }
 
-    public void Grabar()
+    public void grabar()
     {
         Button rojo = findViewById(R.id.grabar);
         rojo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                estadoGrabacion = true;
-                //Queue<Integer> cola=new LinkedList();
-                Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
+
+                estadoGrabacion = !estadoGrabacion;
+
+                if (estadoGrabacion)
+                {
+                    //Queue<Integer> cola=new LinkedList();
+                    z.clear();
+                    Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
-    public void Pausar()
+    public void detener()
     {
         Button azul = findViewById(R.id.pausar);
         azul.setOnClickListener(new View.OnClickListener()
@@ -476,20 +487,18 @@ public class Piano extends Activity
                 if (estadoGrabacion)
                 {
                     estadoGrabacion = false;
-                    Toast.makeText(getApplicationContext(), "La grabacion fue pausada", Toast.LENGTH_LONG).show();
-                    //Toast.makeText(getApplicationContext(), "El audio fue grabado con éxito", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
                 }
-                /*
-                if(estadoReproduccion)
+
+                if (estadoReproduccion)
                 {
-                    estadoReproduccion = false;
-                    Toast.makeText(getApplicationContext(), "Se detuvo la reproduccion", Toast.LENGTH_LONG).show();
-                }*/
+                    Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
-    public void Bucle()
+    public void bucle()
     {
         Button verde = findViewById(R.id.bucle);
         verde.setOnClickListener(new View.OnClickListener()
@@ -500,93 +509,67 @@ public class Piano extends Activity
 
                 estadoReproduccion = !estadoReproduccion;
 
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        while (estadoReproduccion) {
+                            try {
+                                reproducir();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+
                 if(estadoReproduccion)
                 {
-                    Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
-
-                    for (int i = 0; i < z.size(); i++)
-                    {
-                        MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                        final int x = i;
-
-                        if(i==0)
-                            mediaplayer.start();
-
-                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-                        {
-                            @Override
-                            public void onCompletion(MediaPlayer mp)
-                            {
-                                if(x <= z.size())
-                                {
-                                    mp = (MediaPlayer) z.get(x + 1);
-                                    mp.start();
-                                }
-                            }
-                        });
-
-                        /*boolean playing = true;
-
-                        while(playing)
-                        {
-                            if(!mediaplayer.isPlaying())
-                                playing = false;
-                        }*/
-                    }
+                    Thread tread = new Thread(runnable);
+                    tread.start();
                 }
             }
         });
     }
 
-    /*public void destruir(MediaPlayer mp)
+    public void reproducir()
     {
-        if(mp!=null)
-            mp.release();
-    }
+        if(estadoReproduccion)
+        {
+            Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
 
-    public void iniciar(MediaPlayer mp) {
-        //destruir(mp);
-        //mp = MediaPlayer.create(this,z.get(i));
-        mp.start();
-        mp.setLooping(true);
-    }
+            for (int i = 0; i < z.size(); i++)
+            {
+                MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                final int x = i;
 
-    public void pausar(MediaPlayer mp) {
-        if(mp != null && mp.isPlaying()) {
-            //posicion = mp.getCurrentPosition();
-            mp.pause();
+                if(i==0)
+                    mediaplayer.start();
+
+                if(i == z.size()-1)
+                {
+                    mediaplayer.start();
+                    break;
+                }
+
+                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(MediaPlayer mp)
+                    {
+                            mp = (MediaPlayer) z.get(x + 1);
+                            mp.start();
+                    }
+                });
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
         }
     }
-
-    public void continuar(MediaPlayer mp) {
-        if(mp != null && mp.isPlaying()==false) {
-            //mp.seekTo(posicion);
-            mp.start();
-        }
-    }
-
-    public void detener(MediaPlayer mp) {
-        if(mp != null) {
-            mp.stop();
-            //posicion = 0;
-        }
-    }
-
-    /*
-                        //if (mediaplayer.isPlaying() == false)
-                        mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
-                        {
-                            @Override
-                            public void onCompletion(MediaPlayer mp)
-                            {
-                                //Cuando acabe hara esta accion
-                                mp = (MediaPlayer) z.get(x);
-                                mp.start();
-                            }
-                        });*/
 
     @SuppressLint("ClickableViewAccessibility")
-    public void Nota(final int i)
+    public void nota(final int i)
     {
         pantalla = findViewById(R.id.pantalla);
 
@@ -600,7 +583,7 @@ public class Piano extends Activity
                     //boton presionado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
-                        Presion(i,1);
+                        presion(i,1);
                     }
                     inicializarPlayer(i,instrumentoElegido);
                     pantalla.setText(getName(i));
@@ -608,7 +591,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i,1);
+                        soltar(i,1);
                 }
                 return true;
             }
@@ -622,7 +605,7 @@ public class Piano extends Activity
                     //boton presionado
                     if (i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
-                        Presion(i,2);
+                        presion(i,2);
                     }
                     inicializarPlayer(i,instrumentoElegido);
                     pantalla.setText(getName(i));
@@ -630,7 +613,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i,2);
+                        soltar(i,2);
                 }
                 return true;
             }
@@ -645,7 +628,7 @@ public class Piano extends Activity
                     //boton presionado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
                     {
-                        Presion(i,3);
+                        presion(i,3);
                     }
                     inicializarPlayer(i,instrumentoElegido);
                     pantalla.setText(getName(i));
@@ -653,7 +636,7 @@ public class Piano extends Activity
                 {
                     //boton liberado
                     if(i == 0 || i == 2 || i == 4 || i == 5 || i == 7 || i == 9 || i == 11)
-                        Soltar(i,3);
+                        soltar(i,3);
                 }
                 return true;
             }
@@ -688,7 +671,7 @@ public class Piano extends Activity
             return "Si";
     }
 
-    public void Sonar()
+    public void sonar()
     {
         for(int i=0; i<12; i++)
         {
@@ -699,9 +682,7 @@ public class Piano extends Activity
 
         for(int i=0; i<12; i++)
         {
-            Nota(i);
+            nota(i);
         }
-
-
     }
 }

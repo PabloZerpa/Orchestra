@@ -7,8 +7,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import java.util.LinkedList;
 
 public class Bateria extends Activity {
 
@@ -21,6 +25,9 @@ public class Bateria extends Activity {
     private int[] imagenPNotas = {R.drawable.tamborunopres,R.drawable.tambordospres,R.drawable.tambortrespres, R.drawable.tamborcuatropres1,R.drawable.tamborcuatropres2,
                     R.drawable.tamborcincopres,R.drawable.tamborseispres};
     private AudioManager audio;
+    private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false;
+
+    LinkedList z = new LinkedList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,9 @@ public class Bateria extends Activity {
 
         Volumen();
         Sonar();
+        Grabar();
+        Detener();
+        Bucle();
     }
 
     public void Volumen()
@@ -94,9 +104,108 @@ public class Bateria extends Activity {
             botonNota[6].setImageResource(imagenNotas[5]);
     }
 
+    public void Grabar()
+    {
+        Button rojo = findViewById(R.id.grabar);
+        rojo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                estadoGrabacion = !estadoGrabacion;
+
+                if (estadoGrabacion)
+                {
+                    z.clear();
+                    Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void Detener()
+    {
+        Button azul = findViewById(R.id.pausar);
+        azul.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if (estadoGrabacion)
+                {
+                    estadoGrabacion = false;
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
+                }
+
+                if (estadoReproduccion)
+                {
+                    Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void Bucle()
+    {
+        Button verde = findViewById(R.id.bucle);
+        verde.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+                estadoReproduccion = !estadoReproduccion;
+
+                Reproducir();
+            }
+        });
+    }
+
+    public void Reproducir()
+    {
+        if(estadoReproduccion)
+        {
+            Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
+
+            for (int i = 0; i < z.size(); i++)
+            {
+                MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                final int x = i;
+
+                if(i==0)
+                    mediaplayer.start();
+
+                if(i == z.size()-1)
+                {
+                    mediaplayer.start();
+                    break;
+                }
+
+                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(MediaPlayer mp)
+                    {
+                        mp = (MediaPlayer) z.get(x + 1);
+                        mp.start();
+                    }
+                });
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void inicializarPlayer(int n) {
         MediaPlayer mediaplayer = MediaPlayer.create(this, bateria[n]);
         mediaplayer.start();
+        if(estadoGrabacion)
+            z.add(mediaplayer);
     }
 
     public void Nota(final int i)

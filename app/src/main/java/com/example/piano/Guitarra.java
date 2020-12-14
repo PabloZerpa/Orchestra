@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import java.util.LinkedList;
 
 public class Guitarra extends Activity
 {
@@ -17,6 +20,9 @@ public class Guitarra extends Activity
     private int[] botonesId = {R.id.M,R.id.Si,R.id.S,R.id.R,R.id.L,R.id.M2};
     private int[] guitarra = {R.raw.guitarram, R.raw.guitarrasi, R.raw.guitarras, R.raw.guitarrar,R.raw.guitarral,R.raw.guitarram};
     private AudioManager audio;
+    private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false;
+
+    LinkedList z = new LinkedList();
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,6 +31,9 @@ public class Guitarra extends Activity
 
         Volumen();
         Sonar();
+        Grabar();
+        Detener();
+        Bucle();
     }
 
     public void Volumen()
@@ -55,10 +64,109 @@ public class Guitarra extends Activity
         }
     }
 
+    public void Grabar()
+    {
+        Button rojo = findViewById(R.id.grabar);
+        rojo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                estadoGrabacion = !estadoGrabacion;
+
+                if (estadoGrabacion)
+                {
+                    z.clear();
+                    Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void Detener()
+    {
+        Button azul = findViewById(R.id.pausar);
+        azul.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if (estadoGrabacion)
+                {
+                    estadoGrabacion = false;
+                    Toast.makeText(getApplicationContext(), "La grabacion finalizo", Toast.LENGTH_LONG).show();
+                }
+
+                if (estadoReproduccion)
+                {
+                    Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void Bucle()
+    {
+        Button verde = findViewById(R.id.bucle);
+        verde.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+                estadoReproduccion = !estadoReproduccion;
+
+                Reproducir();
+            }
+        });
+    }
+
+    public void Reproducir()
+    {
+        if(estadoReproduccion)
+        {
+            Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
+
+            for (int i = 0; i < z.size(); i++)
+            {
+                MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
+                final int x = i;
+
+                if(i==0)
+                    mediaplayer.start();
+
+                if(i == z.size()-1)
+                {
+                    mediaplayer.start();
+                    break;
+                }
+
+                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(MediaPlayer mp)
+                    {
+                        mp = (MediaPlayer) z.get(x + 1);
+                        mp.start();
+                    }
+                });
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void inicializarPlayer(int n)
     {
         MediaPlayer mediaplayer = MediaPlayer.create(this, guitarra[n]);
         mediaplayer.start();
+        if(estadoGrabacion)
+            z.add(mediaplayer);
     }
 
     public void Nota(final int i)

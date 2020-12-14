@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
-//Arreglar nombres de notas
-//Agregar notas mas agudas / graves a las octavas
-//Mejorar la UI (agregar botones personalizados)
+//Arreglar tamaño de notas del piano
+//Arreglar metodo de bucle
+//Agregar mejores botones y fondos
 
 public class MainActivity extends AppCompatActivity
 {

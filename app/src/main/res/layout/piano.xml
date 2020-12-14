@@ -39,14 +39,15 @@
                 style="@style/SubControl">
 
                 <Button
-                    android:id="@+id/mostrar"
+                    android:id="@+id/bucle"
                     style="@style/botonAmarillo" />
 
                 <Button
-                    android:id="@+id/bucle"
+                    android:id="@+id/mostrar"
                     style="@style/botonVerde" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

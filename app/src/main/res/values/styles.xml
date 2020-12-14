@@ -26,7 +26,6 @@
         <item name="android:gravity">center</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_marginTop">20dp</item>
-        <item name="android:background">@color/Black</item>
     </style>
 
     <style name="SubControl">
@@ -39,7 +38,6 @@
     <style name="botonRojo">
         <item name="android:layout_width">110dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Red</item>
         <item name="android:text">@string/Grabar</item>
@@ -50,31 +48,28 @@
     <style name="botonAzul">
         <item name="android:layout_width">110dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Blue</item>
-        <item name="android:text">@string/Pausar</item>
+        <item name="android:text">@string/Detener</item>
         <item name="android:textColor">@color/Black</item>
-        <item name="android:onClick">Pausar</item>
-    </style>
-
-    <style name="botonAmarillo">
-        <item name="android:layout_width">110dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">7dp</item>
-        <item name="android:background">@color/Yellow</item>
-        <item name="android:text">@string/Notas</item>
-        <item name="android:textColor">@color/Black</item>
-        <item name="android:onClick">Notas</item>
+        <item name="android:onClick">Detener</item>
     </style>
 
     <style name="botonVerde">
         <item name="android:layout_width">110dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">7dp</item>
         <item name="android:background">@color/Green</item>
+        <item name="android:text">@string/Notas</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:onClick">Notas</item>
+    </style>
+
+    <style name="botonAmarillo">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:background">@color/Yellow</item>
         <item name="android:text">@string/Reproducir</item>
         <item name="android:textColor">@color/Black</item>
         <item name="android:onClick">Bucle</item>
@@ -102,7 +97,7 @@
         <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_margin">5dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/White</item>
         <item name="android:textColor">@color/Black</item>
@@ -158,16 +153,16 @@
     </style>
 
     <style name="LayoutCuerdas">
-        <item name="android:layout_width">650dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">160dp</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@color/Beige</item>
+        <item name="android:background">@color/None</item>
     </style>
 
     <style name="Cuerda">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">12dp</item>
-        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_margin">9dp</item>
         <item name="android:background">@color/Gray</item>
         <item name="android:onClick">Sonar</item>
     </style>

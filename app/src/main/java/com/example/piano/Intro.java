@@ -15,7 +15,7 @@ public class Intro extends Activity
 
     ImageView logo;
     TextView nombre;
-    ObjectAnimator animatorAlpha, animatorY, animatorRotation;
+    ObjectAnimator animatorAlpha;
     AnimatorSet animatorSet;
     long duracion = 2000;
 
@@ -28,7 +28,7 @@ public class Intro extends Activity
         nombre = findViewById(R.id.nombre);
         nombre.setVisibility(View.INVISIBLE);
 
-        Animacion(logo, 350f);
+        Animacion(logo);
 
         new Handler().postDelayed(new Runnable()
         {
@@ -49,13 +49,11 @@ public class Intro extends Activity
     }
 
     @SuppressLint("ObjectAnimatorBinding")
-    public void Animacion(ImageView logo, float desplazamiento)
+    public void Animacion(ImageView logo)
     {
-        animatorY = ObjectAnimator.ofFloat(logo,"y",desplazamiento).setDuration(duracion);
         animatorAlpha = ObjectAnimator.ofFloat(logo, View.ALPHA,0.0f, 1.0f).setDuration(duracion);
-        animatorRotation = ObjectAnimator.ofFloat(logo, "rotation",0,360).setDuration(duracion);
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animatorY,animatorAlpha,animatorRotation);
+        animatorSet.playTogether(animatorAlpha);
         animatorSet.start();
     }
 

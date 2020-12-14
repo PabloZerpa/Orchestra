@@ -45,7 +45,7 @@
         <ImageButton
             android:id="@+id/flauta"
             android:layout_width="70dp"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:background="@color/None"
             android:src="@drawable/iconoflauta2" />
     </LinearLayout>

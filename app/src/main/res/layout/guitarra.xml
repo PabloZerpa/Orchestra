@@ -4,15 +4,59 @@
     android:id="@+id/Principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="@color/DarkBrown"
-    android:gravity="center"
+    android:background="@drawable/fondo"
+    android:gravity="top|center"
     android:orientation="vertical">
 
-    <SeekBar
-        android:id="@+id/volumen"
-        style="@style/Volumen"
-        android:background="@color/Brown" />
+    <LinearLayout
+        android:id="@+id/AreaControl"
+        style="@style/Control"
+        android:layout_margin="30dp"
+        android:layout_width="450dp"
+        android:orientation="vertical"
+        android:background="@drawable/borde_redondo">
+
+        <LinearLayout
+            android:id="@+id/GrupoBotones"
+            android:layout_width="370dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/Botones1"
+                style="@style/SubControl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+
+                <Button
+                    android:id="@+id/grabar"
+                    style="@style/botonRojo" />
+
+                <Button
+                    android:id="@+id/pausar"
+                    style="@style/botonAzul" />
+
+                <Button
+                    android:id="@+id/bucle"
+                    style="@style/botonAmarillo" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Control"
+            style="@style/SubControl"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <SeekBar
+                android:id="@+id/volumen"
+                style="@style/Volumen" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/Mastil"
@@ -47,13 +91,6 @@
                 android:id="@+id/M2"
                 style="@style/Cuerda" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Agarre"
-            android:layout_width="50dp"
-            android:layout_height="160dp"
-            android:background="@color/Brown"
-            android:orientation="vertical" />
 
     </LinearLayout>
 
