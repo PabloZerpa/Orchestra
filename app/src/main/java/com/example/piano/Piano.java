@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -50,7 +51,6 @@ public class Piano extends Activity
     private String[] valores = {"Piano","Guitarra","Bateria","Flauta","Trompeta"};
     private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false;
     private TextView pantalla;
-
     LinkedList z = new LinkedList();
 
     //--------------------Imagenes con las notas------------------------------------
@@ -464,7 +464,6 @@ public class Piano extends Activity
 
                 if (estadoGrabacion)
                 {
-                    //Queue<Integer> cola=new LinkedList();
                     z.clear();
                     Toast.makeText(getApplicationContext(), "La grabación comenzó", Toast.LENGTH_LONG).show();
                 }
@@ -506,26 +505,16 @@ public class Piano extends Activity
             @Override
             public void onClick(View view)
             {
-
                 estadoReproduccion = !estadoReproduccion;
-
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        while (estadoReproduccion) {
-                            try {
-                                reproducir();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                };
 
                 if(estadoReproduccion)
                 {
-                    Thread tread = new Thread(runnable);
-                    tread.start();
+                    Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
+                    reproducir();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -533,39 +522,27 @@ public class Piano extends Activity
 
     public void reproducir()
     {
-        if(estadoReproduccion)
-        {
-            Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
-
             for (int i = 0; i < z.size(); i++)
             {
                 MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                final int x = i;
+                final int current = i;
 
-                if(i==0)
+                if(i == 0)
                     mediaplayer.start();
-
-                if(i == z.size()-1)
-                {
-                    mediaplayer.start();
-                    break;
-                }
 
                 mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
                 {
                     @Override
                     public void onCompletion(MediaPlayer mp)
                     {
-                            mp = (MediaPlayer) z.get(x + 1);
+                        if(current < z.size() - 1)
+                        {
+                            mp = (MediaPlayer) z.get(current + 1);
                             mp.start();
+                        }
                     }
                 });
             }
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
