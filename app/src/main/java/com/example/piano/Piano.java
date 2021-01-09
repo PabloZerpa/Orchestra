@@ -49,8 +49,9 @@ public class Piano extends Activity
     private AudioManager audio;
     private String instrumentoElegido = "Piano";
     private String[] valores = {"Piano","Guitarra","Bateria","Flauta","Trompeta"};
-    private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false;
+    private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false, x = false;
     private TextView pantalla;
+    MediaPlayer enReproduccion;
     LinkedList z = new LinkedList();
 
     //--------------------Imagenes con las notas------------------------------------
@@ -63,8 +64,8 @@ public class Piano extends Activity
     private int[] imagenSinNotas = {R.drawable.ni,R.drawable.na,R.drawable.nm,R.drawable.na,R.drawable.nd,R.drawable.ni,R.drawable.na,R.drawable.nm,R.drawable.na,
                                     R.drawable.nm,R.drawable.na,R.drawable.nd};
     //--------------------Imagenes presionadas sin las notas------------------------------------
-    private int[] imagenPSinNotas = {R.drawable.nip,R.drawable.na,R.drawable.nmp,R.drawable.na,R.drawable.ndp,R.drawable.nip,R.drawable.na,R.drawable.nmp,R.drawable.na,
-                                     R.drawable.nmp,R.drawable.na,R.drawable.ndp};
+    private int[] imagenPSinNotas = {R.drawable.nip,R.drawable.nap,R.drawable.nmp,R.drawable.nap,R.drawable.ndp,R.drawable.nip,R.drawable.nap,R.drawable.nmp,R.drawable.nap,
+                                     R.drawable.nmp,R.drawable.nap,R.drawable.ndp};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -126,7 +127,8 @@ public class Piano extends Activity
             int index = botonVolumen.getProgress();
             botonVolumen.setProgress(index + 1);
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+        }
+        else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
         {
             int index = botonVolumen.getProgress();
             botonVolumen.setProgress(index - 1);
@@ -510,7 +512,16 @@ public class Piano extends Activity
                 if(estadoReproduccion)
                 {
                     Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
-                    reproducir();
+
+                    new Thread(new Runnable()
+                    {
+                        public void run()
+                        {
+                            while(estadoReproduccion && !x) {
+                                reproducir();
+                            }
+                        }
+                    }).start();
                 }
                 else
                 {
@@ -522,27 +533,28 @@ public class Piano extends Activity
 
     public void reproducir()
     {
-            for (int i = 0; i < z.size(); i++)
+        for (int i = 0; i < z.size(); i++)
+        {
+            enReproduccion = (MediaPlayer) z.get(i);
+            final int current = i;
+
+            if (i == 0)
+                enReproduccion.start();
+
+            enReproduccion.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
             {
-                MediaPlayer mediaplayer = (MediaPlayer) z.get(i);
-                final int current = i;
-
-                if(i == 0)
-                    mediaplayer.start();
-
-                mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                @Override
+                public void onCompletion(MediaPlayer mp)
                 {
-                    @Override
-                    public void onCompletion(MediaPlayer mp)
+                    if (current < z.size() - 1)
                     {
-                        if(current < z.size() - 1)
-                        {
-                            mp = (MediaPlayer) z.get(current + 1);
-                            mp.start();
-                        }
+                        mp = (MediaPlayer) z.get(current + 1);
+                        mp.start();
                     }
-                });
-            }
+                }
+            });
+            x = i < z.size();
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
