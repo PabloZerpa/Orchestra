@@ -124,7 +124,7 @@
 
         <ImageButton
             android:id="@+id/Si"
-            style="@style/Nota2" />
+            style="@style/Nota3" />
 
         <Space
             android:layout_width="2dp" />
@@ -177,7 +177,7 @@
 
         <ImageButton
             android:id="@+id/Si2"
-            style="@style/Nota2" />
+            style="@style/Nota3" />
 
         <Space
             android:layout_width="2dp" />
@@ -230,7 +230,7 @@
 
         <ImageButton
             android:id="@+id/Si3"
-            style="@style/Nota2" />
+            style="@style/Nota3" />
 
     </TableRow>
 

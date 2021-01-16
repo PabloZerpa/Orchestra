@@ -14,40 +14,62 @@
         android:id="@+id/LayoutInstumentos1"
         style="@style/LayoutInstrumentos">
 
-        <ImageButton
-            android:id="@+id/piano"
-            android:layout_width="175dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="50dp"
-            android:src="@drawable/iconopiano" />
+        <LinearLayout
+            android:id="@+id/pianobateriaguitarra"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="120dp"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/guitarra"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/None"
-            android:src="@drawable/iconoguitarra2" />
+            <ImageButton
+                android:id="@+id/piano"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:src="@drawable/iconopiano2"
+                android:background="@color/Blue" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/instrumentos2"
+                android:layout_width="300dp"
+                android:layout_height="160dp"
+                android:background="@color/None">
 
-    <LinearLayout
-        android:id="@+id/LayoutInstumentos2"
-        style="@style/LayoutInstrumentos">
+                <ImageButton
+                    android:id="@+id/guitarra"
+                    android:layout_width="110dp"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/Red"
+                    android:src="@drawable/iconoguitarra3" />
 
-        <ImageButton
-            android:id="@+id/bateria"
-            android:layout_width="160dp"
-            android:layout_height="120dp"
-            android:layout_marginRight="80dp"
-            android:background="@color/None"
-            android:src="@drawable/iconobateria2" />
+                <ImageButton
+                    android:id="@+id/bateria"
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/Yellow"
+                    android:src="@drawable/iconobateria3" />
+            </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/flauta"
-            android:layout_width="70dp"
-            android:layout_height="120dp"
-            android:background="@color/None"
-            android:src="@drawable/iconoflauta2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/instrumentos3"
+            android:layout_width="60dp"
+            android:layout_height="307dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageButton
+                android:id="@+id/flauta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/Green"
+                android:src="@drawable/iconoflauta2" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

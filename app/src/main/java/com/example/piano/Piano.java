@@ -9,7 +9,9 @@ import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,7 +53,6 @@ public class Piano extends Activity
     private String[] valores = {"Piano","Guitarra","Bateria","Flauta","Trompeta"};
     private boolean estadoGrabacion = false, estadoReproduccion = false, mostrar = false, x = false;
     private TextView pantalla;
-    MediaPlayer enReproduccion;
     LinkedList z = new LinkedList();
 
     //--------------------Imagenes con las notas------------------------------------
@@ -493,6 +494,7 @@ public class Piano extends Activity
 
                 if (estadoReproduccion)
                 {
+                    estadoReproduccion = false;
                     Toast.makeText(getApplicationContext(), "Se detuvo el audio", Toast.LENGTH_LONG).show();
                 }
             }
@@ -512,16 +514,18 @@ public class Piano extends Activity
                 if(estadoReproduccion)
                 {
                     Toast.makeText(getApplicationContext(), "Reproduciendo audio", Toast.LENGTH_LONG).show();
+                    reproducir();
 
-                    new Thread(new Runnable()
+                    /*new Thread(new Runnable()
                     {
                         public void run()
                         {
-                            while(estadoReproduccion && !x) {
+                            while (estadoReproduccion && !x)
+                            {
                                 reproducir();
                             }
                         }
-                    }).start();
+                    }).start();*/
                 }
                 else
                 {
@@ -533,27 +537,27 @@ public class Piano extends Activity
 
     public void reproducir()
     {
-        for (int i = 0; i < z.size(); i++)
+        for (int j = 0; j < 10; j++)
         {
-            enReproduccion = (MediaPlayer) z.get(i);
-            final int current = i;
-
-            if (i == 0)
-                enReproduccion.start();
-
-            enReproduccion.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+            for (int i = 0; i < z.size(); i++)
             {
-                @Override
-                public void onCompletion(MediaPlayer mp)
-                {
-                    if (current < z.size() - 1)
-                    {
-                        mp = (MediaPlayer) z.get(current + 1);
-                        mp.start();
+                MediaPlayer enReproduccion;
+                enReproduccion = (MediaPlayer) z.get(i);
+                final int current = i;
+
+                if (i == 0)
+                    enReproduccion.start();
+
+                enReproduccion.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        if (current < z.size() - 1) {
+                            mp = (MediaPlayer) z.get(current + 1);
+                            mp.start();
+                        }
                     }
-                }
-            });
-            x = i < z.size();
+                });
+            }
         }
     }
 

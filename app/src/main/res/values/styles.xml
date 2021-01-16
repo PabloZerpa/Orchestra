@@ -1,11 +1,10 @@
 <resources>
 
     <style name="LayoutInstrumentos">
-        <item name="android:layout_width">350dp</item>
-        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:layout_marginTop">5dp</item>
     </style>
 
     <style name="Titulo">
@@ -107,7 +106,7 @@
 
     <style name="layoutNotas">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">180dp</item>
+        <item name="android:layout_height">175dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:orientation">vertical</item>
@@ -130,7 +129,7 @@
     </style>
 
     <style name="Nota3">
-        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_width">23dp</item>
         <item name="android:layout_height">180dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginRight">1dp</item>
